@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta property="og:image" content="https://ebdfiel.com.br/ebdfiel.png?v=2" />
   <meta name="twitter:image" content="https://ebdfiel.com.br/ebdfiel.png?v=2" />
@@ -24,7 +24,7 @@
   </script>
 
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#07111f">
+  <meta name="theme-color" content="#1a3a5c">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="EBD Fiel">
@@ -35,1984 +35,942 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --bg: #07111f;
-      --bg-soft: #0c1828;
-      --stroke: rgba(255,255,255,0.1);
-      --text: #eef6fc;
-      --muted: #a7bacb;
-      --primary: #f7b24d;
-      --primary-2: #ff9800;
-      --success: #22c55e;
+      --primary: #1a3a5c;
+      --primary-dark: #0f2a45;
+      --primary-light: #2c4a6e;
+      --secondary: #c9a03d;
+      --secondary-dark: #a07d2e;
+      --accent: #e8b84a;
+      --text: #1e293b;
+      --text-light: #475569;
+      --text-muted: #64748b;
+      --bg: #ffffff;
+      --bg-soft: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --warning: #f59e0b;
       --danger: #ef4444;
-      --dark: #102131;
-      --shadow: 0 20px 60px rgba(0,0,0,0.32);
-      --container: 1240px;
-      --bottom-nav-height: 78px;
-      --bg-primary: #07111f;
-      --bg-secondary: #0c1828;
-      --text-primary: #eef6fc;
-      --text-secondary: #a7bacb;
-      --card-bg: rgba(255,255,255,0.04);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --radius: 12px;
     }
 
-    [data-theme="light"] {
-      --bg: #f5f7fa;
-      --bg-soft: #ffffff;
-      --stroke: rgba(0,0,0,0.1);
-      --text: #1a2a3a;
-      --muted: #5a6a7a;
-      --primary: #f7b24d;
-      --primary-2: #ff9800;
-      --dark: #f0f2f5;
-      --shadow: 0 20px 60px rgba(0,0,0,0.1);
-      --bg-primary: #f5f7fa;
-      --bg-secondary: #ffffff;
-      --text-primary: #1a2a3a;
-      --text-secondary: #5a6a7a;
-      --card-bg: rgba(0,0,0,0.02);
-    }
-
-    [data-theme="light"] body {
-      background: linear-gradient(180deg, #f5f7fa 0%, #eef2f6 100%);
-    }
-
-    [data-theme="light"] .topbar {
-      background: rgba(255,255,255,0.95);
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    [data-theme="light"] .class-section,
-    [data-theme="light"] .settings-section,
-    [data-theme="light"] .stat-card,
-    [data-theme="light"] .video-section,
-    [data-theme="light"] .panel-side,
-    [data-theme="light"] .about-section {
-      background: #ffffff;
-      border-color: #e2e8f0;
-    }
-
-    [data-theme="light"] .lesson-card {
-      background: #ffffff;
-      border-color: #e2e8f0;
-    }
-
-    [data-theme="light"] .lesson-title {
-      color: #1a2a3a;
-    }
-
-    [data-theme="light"] .hero-panel {
-      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+    [data-theme="dark"] {
+      --primary: #2c4a6e;
+      --primary-dark: #1e3a5f;
+      --text: #e2e8f0;
+      --text-light: #cbd5e1;
+      --text-muted: #94a3b8;
+      --bg: #0f172a;
+      --bg-soft: #1e293b;
+      --bg-card: #1e293b;
+      --border: #334155;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', sans-serif;
+      background: var(--bg);
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(62,166,255,0.12), transparent 28%),
-        radial-gradient(circle at top right, rgba(247,178,77,0.12), transparent 24%),
-        linear-gradient(180deg, #06101c 0%, #0a1626 40%, #08111d 100%);
-      line-height: 1.6;
-      overflow-x: hidden;
+      line-height: 1.5;
       min-height: 100vh;
-      padding-bottom: calc(var(--bottom-nav-height) + 16px);
-      opacity: 0;
-      transform: translateY(10px);
-      animation: pageEnter 0.35s ease forwards;
-      transition: background-color 0.3s, color 0.3s;
-      overscroll-behavior: none;
-      -webkit-overflow-scrolling: touch;
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
     }
 
-    /* Permitir seleção de texto normalmente */
-    input, textarea, [contenteditable="true"] {
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
-    }
-
-    [data-theme="light"] body {
-      background: linear-gradient(180deg, #f5f7fa 0%, #eef2f6 100%);
-    }
-
-    body.page-leaving {
-      animation: pageLeave 0.25s ease forwards;
-    }
-
-    @keyframes pageEnter {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pageLeave {
-      from { opacity: 1; transform: translateY(0); }
-      to { opacity: 0; transform: translateY(8px); }
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    button { font-family: inherit; }
-    /* ==================== FORÇAR TÍTULOS AO MESMO TAMANHO ==================== */
-/* Isso vai sobrescrever qualquer estilo que venha do conteúdo da lição */
-.lesson-description h1,
-.lesson-description h2,
-.lesson-description h3,
-.lesson-description h4,
-.lesson-description h5,
-.lesson-description h6,
-.lesson-description strong,
-.lesson-description b {
-  font-size: 0.96rem !important;
-  font-weight: 700 !important;
-  color: #1e3a8a !important;  /* Azul escuro */
-  margin: 8px 0 !important;
-}
-
-/* Remove qualquer estilo inline que possa estar vindo do conteúdo */
-.lesson-description *[style*="font-size"] {
-  font-size: inherit !important;
-}
-
-/* Força parágrafos ao mesmo tamanho */
-.lesson-description p {
-  font-size: 1rem !important;
-  line-height: 1.7 !important;
-  margin-bottom: 0.75rem !important;
-}
-
-    /* ==================== ESTILOS PARA IMPRESSÃO ==================== */
-    @media print {
-      body {
-        background: white !important;
-        color: black !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-      
-      .topbar, .bottom-app-nav, .theme-toggle, #notificationPrompt, 
-      .social-strip, .hero-actions, .quick-links, footer, 
-      .loading-overlay, #splash-screen, #particles {
-        display: none !important;
-      }
-      
-      .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-      
-      .lesson-card {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        border: 1px solid #ccc !important;
-        box-shadow: none !important;
-        margin-bottom: 20px !important;
-      }
-      
-      .status-badge {
-        border: 1px solid #ccc !important;
-        background: #f0f0f0 !important;
-        color: black !important;
-      }
-      
-      .hero-panel, .class-section, .about-section {
-        border: 1px solid #ccc !important;
-        background: white !important;
-        box-shadow: none !important;
-      }
-      
-      a {
-        text-decoration: none !important;
-        color: black !important;
-      }
-      
-      .tab-btn {
-        border: 1px solid #ccc !important;
-        background: #f0f0f0 !important;
-        color: black !important;
-      }
-    }
-
-    /* ==================== PADRONIZAÇÃO DE TAMANHOS COM NEGRITO/ITÁLICO ==================== */
-    .lesson-description,
-    .lesson-description * {
-      font-size: 0.96rem !important;
-    }
-
-    .lesson-description h1,
-    .lesson-description h2,
-    .lesson-description h3,
-    .lesson-description h4,
-    .lesson-description h5,
-    .lesson-description h6,
-    .lesson-description strong,
-    .lesson-description b {
-      font-size: 0.96rem !important;
-      font-weight: 700 !important;
-      color: var(--primary);
-      margin: 8px 0 !important;
-    }
-
-    .lesson-description em,
-    .lesson-description i {
-      font-size: 0.96rem !important;
-      font-style: italic !important;
-      font-weight: normal !important;
-    }
-
-    .lesson-description strong em,
-    .lesson-description em strong,
-    .lesson-description b i,
-    .lesson-description i b {
-      font-size: 0.96rem !important;
-      font-weight: 700 !important;
-      font-style: italic !important;
-      color: var(--primary);
-    }
-
-    .lesson-description p {
-      font-size: 0.96rem !important;
-      line-height: 1.7 !important;
-      margin-bottom: 12px !important;
-    }
-
-    .lesson-description ul,
-    .lesson-description ol {
-      margin: 8px 0 8px 20px !important;
-    }
-
-    .lesson-description li {
-      font-size: 0.96rem !important;
-      margin: 4px 0 !important;
-    }
-
-    .lesson-description blockquote {
-      font-style: italic !important;
-      border-left: 3px solid var(--primary) !important;
-      padding-left: 16px !important;
-      margin: 12px 0 !important;
-      font-size: 0.96rem !important;
-    }
-
-    /* ==================== FIM PADRONIZAÇÃO ==================== */
-
-    #splash-screen {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at top left, rgba(62,166,255,0.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(247,178,77,0.16), transparent 26%),
-        linear-gradient(180deg, #06101c 0%, #0a1626 45%, #08111d 100%);
-      display: grid;
-      place-items: center;
-      z-index: 9999;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-
-    #splash-screen.fade-out {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .splash-inner {
-      text-align: center;
-      padding: 24px;
-      animation: splashRise 0.8s ease;
-      width: 100%;
-      max-width: 360px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .splash-logo {
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
-      margin: 0 auto 18px;
-      animation: splashPulse 1.8s ease-in-out infinite;
-      filter: drop-shadow(0 12px 28px rgba(0,0,0,0.28));
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .splash-title {
-      font-size: 1.55rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-      color: #eef6fc;
-    }
-
-    .splash-subtitle {
-      color: #a7bacb;
-      font-size: 0.95rem;
-      margin-bottom: 18px;
-    }
-
-    .splash-loader {
-      width: 180px;
-      max-width: 70vw;
-      height: 6px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.08);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .splash-loader span {
-      display: block;
-      width: 40%;
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #f7b24d, #ff9800);
-      animation: splashLoad 1.4s ease-in-out infinite;
-    }
-
-    @keyframes splashRise {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes splashPulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.96;
-      }
-      50% {
-        transform: scale(1.06);
-        opacity: 1;
-      }
-    }
-
-    @keyframes splashLoad {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(320%); }
-    }
-
-    #particles {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 1;
+    /* ==================== HEADER ==================== */
+    .topbar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
     }
 
     .container {
-      width: min(calc(100% - 32px), var(--container));
+      max-width: 1280px;
       margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(7,17,31,0.78);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--stroke);
+      padding: 0 24px;
     }
 
     .topbar-inner {
-      min-height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding: 10px 0;
+      height: 70px;
     }
 
-    .brand {
+    .logo {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       cursor: pointer;
-      min-width: 0;
-      position: relative;
-      z-index: 10;
     }
 
-    .brand-mark {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(247,178,77,0.18), rgba(62,166,255,0.14));
-      border: 1px solid rgba(255,255,255,0.14);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      flex-shrink: 0;
+    .logo-icon {
+      width: 45px;
+      height: 45px;
+      background: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
     }
 
-    .brand-copy h1 {
-      font-size: 1.14rem;
-      line-height: 1.1;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+    .logo-text h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
     }
 
-    .brand-copy p {
-      color: var(--muted);
-      font-size: 0.92rem;
-      white-space: nowrap;
+    .logo-text p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      padding: 8px 16px;
+      border-radius: 8px;
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--bg-soft);
+      color: var(--primary);
+    }
+
+    .theme-toggle {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 8px 12px;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background: var(--border);
     }
 
     .mobile-menu-btn {
       display: none;
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.05);
-      color: #fff;
-      font-size: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text);
       cursor: pointer;
-      transition: 0.2s ease;
     }
 
-    .mobile-menu-btn:hover {
-      background: rgba(255,255,255,0.08);
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      transition: transform 0.28s ease, opacity 0.28s ease, visibility 0.28s ease;
-    }
-
-    nav a {
-      padding: 10px 14px;
-      border-radius: 999px;
-      color: #dce6ef;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: 0.25s ease;
-    }
-
-    nav a:hover {
-      background: rgba(255,255,255,0.06);
-      color: #fff;
-    }
-
-    nav a.nav-cta {
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color: var(--dark);
-      font-weight: 800;
-      box-shadow: 0 12px 28px rgba(255,152,0,0.22);
-    }
-
+    /* ==================== HERO ==================== */
     .hero {
-      padding: 42px 0 22px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 60px 0;
+      margin-bottom: 40px;
     }
 
-    .hero-panel {
-      overflow: hidden;
-      border-radius: 38px;
-      border: 1px solid var(--stroke);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
-        radial-gradient(circle at 10% 20%, rgba(62,166,255,0.16), transparent 18%),
-        radial-gradient(circle at 85% 15%, rgba(247,178,77,0.16), transparent 18%);
-      padding: 56px;
-      box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 30px;
-      align-items: center;
+    .hero-content {
+      max-width: 700px;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(247,178,77,0.12);
-      border: 1px solid rgba(247,178,77,0.24);
-      color: #ffe6c2;
-      font-size: 0.88rem;
-      font-weight: 800;
-      margin-bottom: 16px;
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 20px;
     }
 
     .hero h2 {
-      font-size: clamp(2.3rem, 5vw, 4.2rem);
-      line-height: 1.03;
-      letter-spacing: -0.04em;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
       margin-bottom: 16px;
+      line-height: 1.2;
     }
 
     .hero p {
-      max-width: 60ch;
-      color: var(--muted);
-      font-size: 1.06rem;
-      margin-bottom: 26px;
+      color: rgba(255,255,255,0.85);
+      font-size: 1rem;
+      margin-bottom: 28px;
+      max-width: 550px;
     }
 
-    .hero-actions {
+    .hero-buttons {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 22px;
     }
 
     .btn {
-      min-height: 50px;
-      padding: 0 22px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-weight: 800;
-      transition: 0.25s ease;
-      border: 1px solid transparent;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -120%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.55),
-        transparent
-      );
-      transform: skewX(-20deg);
-    }
-
-    .btn:hover::after {
-      animation: shineMove 0.9s ease;
-    }
-
-    @keyframes shineMove {
-      from { left: -120%; }
-      to { left: 140%; }
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #ffb347, #ff9800);
-      color: #1a1a1a;
-      box-shadow:
-        0 10px 25px rgba(255,152,0,0.25),
-        inset 0 1px 0 rgba(255,255,255,0.4);
-      border: 1px solid rgba(255,255,255,0.2);
-      transition: all 0.25s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow:
-        0 16px 35px rgba(255,152,0,0.35),
-        inset 0 1px 0 rgba(255,255,255,0.5);
-    }
-
-    .btn-secondary {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.2);
-      box-shadow:
-        0 10px 25px rgba(37,99,235,0.25),
-        inset 0 1px 0 rgba(255,255,255,0.25);
-      transition: all 0.25s ease;
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow:
-        0 16px 35px rgba(37,99,235,0.35),
-        inset 0 1px 0 rgba(255,255,255,0.35);
-    }
-
-    .hero-card {
-      border-radius: 24px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.05);
-      padding: 20px;
-      backdrop-filter: blur(10px);
-      margin-bottom: 14px;
-    }
-
-    .hero-card:last-child {
-      margin-bottom: 0;
-    }
-
-    .hero-card strong {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1rem;
-      margin-bottom: 6px;
-    }
-
-    .hero-card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin: 0;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .hero-stat {
-      border-radius: 20px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.04);
-      padding: 16px;
-    }
-
-    .hero-stat strong {
-      display: block;
-      font-size: 1.35rem;
-      color: var(--primary);
-      margin-bottom: 2px;
-    }
-
-    .hero-stat span {
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .social-strip {
-      padding: 6px 0 12px;
-    }
-
-    .social-strip-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      color: var(--muted);
-    }
-
-    .social-text {
+      transition: all 0.2s;
+      border: none;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.94rem;
     }
 
-    .social-text i {
-      color: var(--primary);
+    .btn-primary {
+      background: var(--secondary);
+      color: var(--primary-dark);
     }
 
-    .social-icons-top,
-    .social-icons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .social-icons-top a,
-    .social-icons a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--stroke);
-      color: #fff;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .social-icons-top a:hover,
-    .social-icons a:hover {
+    .btn-primary:hover {
+      background: var(--secondary-dark);
       transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+    }
+
+    .btn-outline:hover {
       background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.18);
     }
 
+    /* ==================== CARDS DE ESTATÍSTICAS ==================== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .stat-card i {
+      font-size: 2rem;
+      color: var(--secondary);
+      margin-bottom: 12px;
+    }
+
+    .stat-card h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-card p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ==================== SEÇÕES ==================== */
     .section {
-      padding: 22px 0;
+      margin-bottom: 48px;
     }
 
-    .section-heading {
+    .section-header {
       display: flex;
       justify-content: space-between;
-      align-items: end;
-      gap: 18px;
-      margin-bottom: 22px;
+      align-items: flex-end;
+      margin-bottom: 24px;
       flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .section-heading h3 {
-      font-size: clamp(1.6rem, 3vw, 2.35rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 6px;
+    .section-header h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
     }
 
-    .section-heading p {
-      color: var(--muted);
-      max-width: 66ch;
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
-    .class-section {
-      border-radius: 34px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.04);
-      padding: 28px;
-      box-shadow: var(--shadow);
+    /* ==================== CLASS CARD ==================== */
+    .class-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       overflow: hidden;
+      margin-bottom: 32px;
     }
 
-    .class-head {
+    .class-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 18px;
       flex-wrap: wrap;
-      margin-bottom: 18px;
+      gap: 16px;
     }
 
     .class-title {
       display: flex;
       align-items: center;
-      gap: 14px;
-    }
-
-    .class-icon {
-      width: 62px;
-      height: 62px;
-      border-radius: 20px;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      color: #fff;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 35%),
-        linear-gradient(135deg, #f7b24d 0%, #ff9800 55%, #f97316 100%);
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow:
-        0 14px 30px rgba(247,178,77,0.22),
-        inset 0 1px 0 rgba(255,255,255,0.22);
-      font-size: 1.35rem;
-      position: relative;
-    }
-
-    .class-icon i {
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.22));
-    }
-
-    .class-title h4 {
-      font-size: 1.55rem;
-      line-height: 1.1;
-      margin-bottom: 4px;
-    }
-
-    .class-title p {
-      color: var(--muted);
-    }
-
-    .quick-links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .quick-link {
-      min-height: 46px;
-      padding: 0 16px;
-      border-radius: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-    }
-
-    .quick-link.quiz {
-      background: linear-gradient(135deg, #1688dc, #0267b3);
-      color: #fff;
-    }
-
-    .class-layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 22px;
-      align-items: start;
-    }
-
-    .video-section,
-    .panel-side,
-    .about-section,
-    .feature,
-    .empty-message {
-      border: 1px solid var(--stroke);
-      background: rgba(7,17,31,0.42);
-    }
-
-    .video-section,
-    .panel-side {
-      border-radius: 26px;
-      padding: 20px;
-    }
-
-    .panel-side h5 {
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .video-universal-container {
-      width: 100%;
-      max-width: 280px;
-      margin: 0 auto 14px;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: #000;
-      box-shadow: 0 16px 28px rgba(0,0,0,0.28);
-    }
-
-    .video-responsive-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 177.78%;
-      height: 0;
-    }
-
-    .video-responsive-wrapper iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-
-    .trim-hint {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 14px;
-    }
-
-    .trim-tabs {
-      display: flex;
-      gap: 10px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      margin-bottom: 18px;
-      padding: 4px 2px 10px;
-      scroll-snap-type: x proximity;
-    }
-
-    .trim-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .trim-tabs-sticky {
-      position: sticky;
-      top: 90px;
-      z-index: 25;
-      padding-top: 10px;
-      margin-top: -4px;
-      background: linear-gradient(180deg, rgba(7,17,31,0.96), rgba(7,17,31,0.82));
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px;
-      padding-left: 8px;
-      padding-right: 8px;
-    }
-
-    .tab-btn {
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.04);
-      color: #fff;
-      border-radius: 999px;
-      padding: 11px 18px;
-      font-size: 0.95rem;
-      font-weight: 800;
-      cursor: pointer;
-      white-space: nowrap;
-      flex: 0 0 auto;
-      scroll-snap-align: start;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-      transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
-    }
-
-    .tab-btn.trim-q1 {
-      background: linear-gradient(135deg, #f59e0b, #f97316);
-      color: #102131;
-      border-color: transparent;
-      box-shadow: 0 10px 22px rgba(249,115,22,0.18);
-    }
-
-    .tab-btn.trim-q2 {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #ffffff;
-      border-color: transparent;
-      box-shadow: 0 10px 22px rgba(34,197,94,0.22);
-    }
-
-    .tab-btn.trim-q3,
-    .tab-btn.trim-q4 {
-      background: linear-gradient(135deg, #facc15, #eab308);
-      color: #102131;
-      border-color: transparent;
-      box-shadow: 0 10px 22px rgba(234,179,8,0.18);
-    }
-
-    .tab-btn:hover,
-    .tab-btn.active {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.24);
-    }
-
-    .tab-btn.active {
-      outline: 3px solid rgba(255,255,255,0.22);
-      outline-offset: 2px;
-      filter: saturate(1.08) brightness(1.02);
-    }
-
-    .lessons-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 22px;
-    }
-
-    .lesson-card {
-      position: relative;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-      box-shadow: 0 24px 60px rgba(0,0,0,0.22);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .lesson-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255,255,255,0.18);
-      box-shadow: 0 28px 70px rgba(0,0,0,0.28);
-    }
-
-    .lesson-top {
-      position: relative;
-      padding: 22px 22px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .lesson-quarter {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 36px;
-      padding: 0 14px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #fff7ea;
-      background: linear-gradient(135deg, rgba(247,178,77,0.22), rgba(255,152,0,0.14));
-      border: 1px solid rgba(247,178,77,0.28);
-      box-shadow:
-        0 8px 18px rgba(255,152,0,0.12),
-        inset 0 1px 0 rgba(255,255,255,0.08);
-      margin-bottom: 14px;
-    }
-
-    .lesson-quarter i {
-      font-size: 0.82rem;
-      color: #ffd89d;
-    }
-
-    .lesson-number {
-      color: var(--primary);
-      font-size: 0.85rem;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .lesson-title {
-      font-size: 1.18rem;
-      font-weight: 800;
-      line-height: 1.28;
-      color: #fff;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      flex-wrap: wrap;
-      max-width: 92%;
-    }
-
-    .lesson-body {
-      padding: 18px 22px 22px;
-    }
-
-    .lesson-date {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 34px;
-      padding: 0 12px;
-      border-radius: 999px;
-      color: #d8e3ec;
-      font-size: 0.84rem;
-      font-weight: 600;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 14px;
-    }
-
-    .lesson-description {
-      color: #c0d0dd;
-      font-size: 0.96rem;
-      line-height: 1.7;
-      min-height: 92px;
-    }
-
-    .lesson-footer {
-      margin-top: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 12px;
     }
 
-    .lesson-action {
-      min-height: 46px;
-      border-radius: 999px;
-      display: inline-flex;
+    .class-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      border-radius: 14px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      font-weight: 800;
-      border: 0;
+      color: white;
+      font-size: 1.3rem;
+    }
+
+    .class-title h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .class-title p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .quiz-link {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .class-body {
+      padding: 24px;
+    }
+
+    /* ==================== TRIMESTRE TABS ==================== */
+    .trim-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      font-weight: 500;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .lesson-action.primary {
-      min-width: 148px;
-      padding: 0 18px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color: var(--dark);
-      box-shadow: 0 14px 28px rgba(255,152,0,0.18);
+    .tab-btn:hover {
+      background: var(--bg-soft);
     }
 
-    .lesson-action.secondary-ghost {
-      min-width: 46px;
-      width: 46px;
-      padding: 0;
-      background: rgba(255,255,255,0.05);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.10);
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
     }
 
-    .lesson-action:disabled,
-    .lesson-action.disabled {
-      opacity: 0.55;
-      pointer-events: none;
-      cursor: not-allowed;
-      background: rgba(255,255,255,0.06);
-      color: #d2dde7;
-      border-color: rgba(255,255,255,0.08);
-      box-shadow: none;
+    .tab-btn.trim-atual {
+      border: 2px solid var(--secondary);
+    }
+
+    /* ==================== GRADE DE LIÇÕES ==================== */
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .lesson-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
     }
 
     .status-badge {
       position: absolute;
-      top: 18px;
-      right: 18px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      z-index: 2;
-      backdrop-filter: blur(10px);
+      top: 16px;
+      right: 16px;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
     }
 
     .status-badge.available {
-      background: rgba(34,197,94,0.14);
-      color: #d1fae0;
-      border: 1px solid rgba(34,197,94,0.24);
+      background: var(--success);
+      color: white;
     }
 
     .status-badge.preparation {
-      background: rgba(245,158,11,0.14);
-      color: #ffe8bf;
-      border: 1px solid rgba(245,158,11,0.24);
+      background: var(--warning);
+      color: white;
     }
 
-    .empty-message {
-      border-radius: 24px;
-      padding: 36px 24px;
-      text-align: center;
-      color: var(--muted);
+    .lesson-top {
+      padding: 20px 20px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lesson-quarter {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--bg-soft);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 12px;
+    }
+
+    .lesson-number {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .lesson-title {
       font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
     }
 
+    .lesson-body {
+      padding: 16px 20px 20px;
+    }
+
+    .lesson-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lesson-description {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .view-btn {
+      width: 100%;
+      padding: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .view-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .view-btn:disabled {
+      background: var(--border);
+      cursor: not-allowed;
+    }
+
+    /* ==================== ABOUT ==================== */
     .about-section {
-      border-radius: 34px;
-      padding: 30px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin-top: 20px;
     }
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 22px;
-      align-items: stretch;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
     }
 
-    .about-text h3,
-    .about-image-content h3 {
-      font-size: 1.9rem;
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-
-    .about-text > p {
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .about-features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .feature {
-      border-radius: 22px;
-      padding: 18px;
-    }
-
-    .feature-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: rgba(247,178,77,0.14);
-      color: var(--primary);
-      margin-bottom: 12px;
-      font-size: 1.1rem;
-    }
-
-    .feature-text h4 {
-      margin-bottom: 6px;
-    }
-
-    .feature-text p {
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .about-image {
-      display: flex;
-    }
-
-    .about-image-content {
-      width: 100%;
-      border-radius: 28px;
-      padding: 28px;
-      background: linear-gradient(135deg, rgba(247,178,77,0.18), rgba(62,166,255,0.12));
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .about-image-content i {
-      font-size: 3rem;
-      color: #ffe0b1;
+    .about-text h3 {
+      font-size: 1.5rem;
       margin-bottom: 16px;
     }
 
-    .about-image-content p {
-      color: #e6f1f9;
-      max-width: 28ch;
-      margin: 0 auto;
+    .about-text p {
+      color: var(--text-light);
+      margin-bottom: 24px;
     }
 
-    footer {
-      margin-top: 40px;
-      padding: 28px 0 40px;
-      border-top: 1px solid var(--stroke);
-      position: relative;
-      z-index: 2;
-    }
-
-    .footer-content {
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
-    .footer-column h3 {
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-
-    .footer-column p,
-    .footer-column a {
-      color: var(--muted);
-      line-height: 1.9;
-    }
-
-    .footer-column a:hover {
-      color: #fff;
-    }
-
-    .copyright {
-      text-align: center;
-      padding-top: 20px;
-      color: rgba(255,255,255,0.45);
-      font-size: 0.9rem;
-    }
-
-    .bottom-app-nav {
-      position: fixed;
-      left: 12px;
-      right: 12px;
-      bottom: 10px;
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: space-around;
-      gap: 8px;
-      min-height: var(--bottom-nav-height);
-      padding: 10px 12px max(10px, env(safe-area-inset-bottom));
-      background: rgba(7,17,31,0.92);
-      border: 1px solid rgba(255,255,255,0.09);
-      backdrop-filter: blur(16px);
-      border-radius: 24px;
-      box-shadow: 0 24px 50px rgba(0,0,0,0.28);
-    }
-
-    .bottom-nav-link {
-      flex: 1;
-      min-height: 52px;
-      border-radius: 18px;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      color: #dce6ef;
-      font-size: 0.78rem;
-      font-weight: 700;
-      transition: 0.2s ease;
-      text-decoration: none;
-    }
-
-    .bottom-nav-link i { font-size: 1.05rem; }
-
-    .bottom-nav-link.active,
-    .bottom-nav-link:hover {
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-    }
-
-    .theme-toggle {
-      position: fixed;
-      bottom: 100px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f7b24d, #ff9800);
-      border: none;
-      color: #102131;
-      font-size: 1.2rem;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: transform 0.3s;
+    .feature {
       display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.1);
-    }
-
-    #notificationPrompt {
-      position: fixed;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      padding: 16px 24px;
-      border-radius: 60px;
-      z-index: 10001;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      border: 1px solid rgba(247,178,77,0.3);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-    }
-
-    #notificationPrompt div {
-      display: flex;
-      align-items: center;
       gap: 12px;
+      align-items: flex-start;
     }
 
-    #notificationPrompt i {
-      color: #f7b24d;
-      font-size: 1.2rem;
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
     }
 
-    #notificationPrompt strong {
-      color: #fff;
+    .feature-text h4 {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
     }
 
-    #notificationPrompt p {
-      color: #94a3b8;
+    .feature-text p {
       font-size: 0.8rem;
       margin: 0;
     }
 
-    #enableNotificationsBtn {
-      background: linear-gradient(135deg, #f7b24d, #ff9800);
-      border: none;
-      padding: 8px 16px;
-      border-radius: 40px;
-      color: #0f172a;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .loading-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 5000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(7,17,31,0.82);
-      backdrop-filter: blur(10px);
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.25s ease;
-    }
-
-    .loading-overlay.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .loading-box {
-      width: min(86vw, 300px);
-      padding: 28px 24px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.06);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    .about-quote {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
       text-align: center;
     }
 
-    .loading-spinner {
-      width: 46px;
-      height: 46px;
-      margin: 0 auto 14px;
-      border-radius: 50%;
-      border: 4px solid rgba(255,255,255,0.16);
-      border-top-color: var(--primary);
-      animation: spin 0.9s linear infinite;
+    .about-quote i {
+      font-size: 2rem;
+      color: var(--secondary);
+      margin-bottom: 16px;
     }
 
-    .loading-box strong {
-      display: block;
-      margin-bottom: 4px;
+    .about-quote h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    /* ==================== FOOTER ==================== */
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 40px 0 24px;
+      margin-top: 48px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-col h4 {
       font-size: 1rem;
+      margin-bottom: 16px;
     }
 
-    .loading-box p {
-      color: var(--muted);
-      font-size: 0.92rem;
+    .footer-col p, .footer-col a {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      line-height: 2;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .footer-col a:hover {
+      color: var(--secondary);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .social-links {
+      display: flex;
+      gap: 12px;
     }
 
-    @media (max-width: 1080px) {
-      .hero-panel,
-      .class-layout,
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-soft);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .social-links a:hover {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    /* ==================== BOTÃO LIMPAR CACHE ==================== */
+    .clear-cache-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+
+    .clear-cache-btn:hover {
+      opacity: 1;
+      color: var(--danger);
+    }
+
+    /* ==================== MOBILE ==================== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        padding: 16px;
+        gap: 8px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
       .about-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-panel { padding: 34px; }
-      .video-universal-container { max-width: 320px; }
-    }
-
-    @media (max-width: 768px) {
-      .splash-logo {
-        width: 96px;
-        height: 96px;
-      }
-
-      .topbar-install-btn {
-        display: none !important;
-      }
-
-      .topbar-inner {
-        min-height: auto;
-        align-items: center;
-      }
-
-      .topbar-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-shrink: 0;
-      }
-
-      .topbar-install-btn {
-        min-height: 44px;
-        padding: 0 16px;
-        font-size: 0.92rem;
-        white-space: nowrap;
-      }
-
-      .mobile-menu-btn {
-        display: inline-grid;
-        place-items: center;
-      }
-
-      nav {
-        position: fixed;
-        top: 86px;
-        left: 16px;
-        right: 16px;
-        padding: 16px;
-        border-radius: 24px;
-        border: 1px solid var(--stroke);
-        background: rgba(7,17,31,0.94);
-        backdrop-filter: blur(16px);
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-        transform: translateY(-140%);
-        opacity: 0;
-        visibility: hidden;
-      }
-
-      nav.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-      }
-
-      nav a { text-align: center; }
-      .brand-copy p { white-space: normal; }
-      .hero { padding-top: 28px; }
-
-      .hero-panel,
-      .class-section,
-      .about-section,
-      .admin-panel,
-      .edit-modal {
-        padding: 22px;
-        border-radius: 24px;
-      }
-
-      .hero-stats,
-      .about-features {
+      .features-grid {
         grid-template-columns: 1fr;
       }
 
-      .section-heading { align-items: flex-start; }
-      .class-head { align-items: flex-start; }
-      .lesson-row { flex-direction: column; align-items: stretch; }
-      .lesson-row-actions { justify-content: flex-start; }
-      .lessons-grid { grid-template-columns: 1fr; }
-      .lesson-description { min-height: auto; }
-      .lesson-footer { flex-wrap: wrap; }
-      .lesson-action.primary { min-width: 0; }
-      .bottom-app-nav { display: flex; }
-
-      .edit-modal {
-        top: 10px;
-        width: calc(100vw - 16px);
-        max-height: calc(100vh - 20px);
-        border-radius: 20px;
-        padding: 16px;
+      .hero h2 {
+        font-size: 1.75rem;
       }
 
-      .edit-actions {
+      .lessons-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .class-header {
         flex-direction: column;
-      }
-
-      .trim-tabs {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-        overflow: visible;
-        padding: 0;
-        margin: 0 0 18px 0;
-        scroll-snap-type: none;
-      }
-
-      .trim-tabs-sticky {
-        top: 78px;
-      }
-
-      .tab-btn {
-        width: 100%;
-        white-space: normal;
-        text-align: center;
-        justify-content: center;
-        line-height: 1.2;
-        min-height: 52px;
-        padding: 10px 12px;
-      }
-
-      .theme-toggle {
-        bottom: 80px;
-        right: 15px;
-        width: 45px;
-        height: 45px;
-      }
-
-      #notificationPrompt {
-        bottom: 80px;
-        padding: 12px 20px;
-      }
-
-      #notificationPrompt div {
-        gap: 8px;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 
 <body>
-  <div id="splash-screen">
-    <div class="splash-inner">
-      <img src="./ebdfiel.png?v=2" alt="EBD Fiel" class="splash-logo" width="110" height="110" loading="eager" decoding="async" fetchpriority="high">
-      <h2 class="splash-title">EBD Fiel</h2>
-      <p class="splash-subtitle">Fiel à Palavra. Relevante para hoje.</p>
-      <div class="splash-loader">
-        <span></span>
-      </div>
-    </div>
-  </div>
-
-  <canvas id="particles"></canvas>
-
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-box">
-      <div class="loading-spinner"></div>
-      <strong>Abrindo lição...</strong>
-      <p>Preparando o conteúdo para você.</p>
-    </div>
-  </div>
-
-  <div id="notificationPrompt" style="display: none;">
-    <div>
-      <i class="fas fa-bell"></i>
-      <div>
-        <strong>Receber notificações</strong>
-        <p>Saiba quando novas lições chegarem</p>
-      </div>
-      <button id="enableNotificationsBtn">Ativar</button>
-    </div>
-  </div>
-
-  <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
-    <i class="fas fa-moon"></i>
-  </button>
 
   <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand" id="logo">
-        <div class="brand-mark">
-          <img src="./ebdfiel.png?v=2" alt="Logo EBD Fiel">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="logo" id="logo">
+          <div class="logo-icon">
+            <i class="fas fa-bible"></i>
+          </div>
+          <div class="logo-text">
+            <h1>EBD Fiel</h1>
+            <p>Escola Bíblica Dominical</p>
+          </div>
         </div>
-        <div class="brand-copy">
-          <h1>EBD Fiel</h1>
-          <p>Fiel à Palavra. Relevante para hoje.</p>
-        </div>
-      </div>
 
-      <div class="topbar-actions">
-        <button id="installTopBtn" class="btn btn-primary topbar-install-btn" style="display:none;" type="button">
-          <i class="fas fa-download"></i> Instalar
+        <nav class="nav-links" id="mainNav">
+          <a href="#home">Início</a>
+          <a href="#adult-class">Adultos</a>
+          <a href="#youth-class">Jovens</a>
+          <a href="#about">Sobre</a>
+        </nav>
+
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
         </button>
 
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu" aria-expanded="false" type="button">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
           <i class="fas fa-bars"></i>
         </button>
       </div>
-
-      <nav id="mainNav">
-        <a href="#home">Início</a>
-        <a href="#adult-class">Adultos</a>
-        <a href="#youth-class">Jovens</a>
-        <a href="#about">Sobre</a>
-      </nav>
     </div>
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero" id="home">
       <div class="container">
-        <div class="hero-panel">
-          <div>
-            <span class="eyebrow"><i class="fas fa-book-bible"></i> Escola Bíblica Dominical</span>
-            <h2>Vivendo Fiel e ensinando a Palavra de Deus todos os dias.</h2>
-            <p>
-              A Escola Bíblica Dominical é um tempo precioso de crescimento espiritual, comunhão e ensino fiel das Escrituras. Aqui você encontra lições organizadas por trimestre, com conteúdo bíblico, aplicações práticas e recursos para edificação da igreja.
-            </p>
-
-            <div class="hero-actions">
-              <a href="#adult-class" class="btn btn-primary">
-                <i class="fas fa-book-bible"></i> Classe Adultos
-              </a>
-
-              <a href="#youth-class" class="btn btn-secondary">
-                <i class="fas fa-people-group"></i> Classe Jovens
-              </a>
-
-              <button id="installAppBtn" class="btn btn-secondary" style="display:none;" type="button">
-                <i class="fas fa-download"></i> Instalar app
-              </button>
-            </div>
-
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <strong>Ensino</strong>
-                <span>Fundamentado na Bíblia</span>
-              </div>
-              <div class="hero-stat">
-                <strong>Comunhão</strong>
-                <span>Aprendendo juntos</span>
-              </div>
-              <div class="hero-stat">
-                <strong>Prática</strong>
-                <span>Aplicação para a vida</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-side">
-            <div class="hero-card">
-              <strong><i class="fas fa-book"></i> Estudo sistemático</strong>
-              <p>Lições organizadas por trimestre para um aprendizado contínuo e progressivo da Palavra.</p>
-            </div>
-            <div class="hero-card">
-              <strong><i class="fas fa-church"></i> Edificação da igreja</strong>
-              <p>Conteúdo voltado para fortalecer a fé, o discipulado e o serviço cristão.</p>
-            </div>
-            <div class="hero-card">
-              <strong><i class="fas fa-heart"></i> Vida cristã prática</strong>
-              <p>Aplicações que ajudam a viver o evangelho no dia a dia.</p>
-            </div>
+        <div class="hero-content">
+          <span class="hero-badge"><i class="fas fa-church"></i> Desde 2024</span>
+          <h2>Formando discípulos<br>para uma geração fiel</h2>
+          <p>A Escola Bíblica Dominical é o alicerce do ensino cristão. Aqui você encontra lições bíblicas de qualidade para adultos e jovens, com conteúdo relevante e aplicação prática para a vida.</p>
+          <div class="hero-buttons">
+            <a href="#adult-class" class="btn btn-primary"><i class="fas fa-book-open"></i> Classe Adultos</a>
+            <a href="#youth-class" class="btn btn-outline"><i class="fas fa-users"></i> Classe Jovens</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="social-strip">
-      <div class="container social-strip-inner">
-        <div class="social-text"><i class="fas fa-hashtag"></i> Acompanhe a EBD Fiel nas redes sociais</div>
-        <div class="social-icons-top">
-          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+    <div class="container">
+      <!-- STATS -->
+      <div class="stats-grid" id="statsContainer">
+        <div class="stat-card">
+          <i class="fas fa-book"></i>
+          <h3 id="totalLessons">0</h3>
+          <p>Lições disponíveis</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-calendar-alt"></i>
+          <h3>4</h3>
+          <p>Trimestres</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-users"></i>
+          <h3>2</h3>
+          <p>Classes</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-download"></i>
+          <h3>PWA</h3>
+          <p>Instale o app</p>
         </div>
       </div>
-    </section>
 
-    <section class="section" id="adult-class">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <h3>Classe Adultos</h3>
-            <p>Lições para adultos com estudos bíblicos profundos, aplicações práticas e acesso rápido ao conteúdo do trimestre.</p>
-          </div>
-        </div>
-
-        <section class="class-section">
-          <div class="class-head">
+      <!-- CLASSE ADULTOS -->
+      <section class="section" id="adult-class">
+        <div class="class-card">
+          <div class="class-header">
             <div class="class-title">
-              <div class="class-icon"><i class="fas fa-book-bible"></i></div>
+              <div class="class-icon"><i class="fas fa-user-graduate"></i></div>
               <div>
-                <h4>Adultos</h4>
-                <p>Estudos consistentes, reverentes e bem estruturados.</p>
+                <h4>Classe Adultos</h4>
+                <p>Estudos profundos e aplicação prática</p>
               </div>
             </div>
-
-            <div class="quick-links">
-              <a href="https://ebdfiel.github.io/Quizzes-ClaseAdultos-2026/" target="_blank" class="quick-link quiz"><i class="fas fa-brain"></i> Quiz</a>
-            </div>
+            <a href="https://ebdfiel.github.io/Quizzes-ClaseAdultos-2026/" target="_blank" class="quiz-link"><i class="fas fa-brain"></i> Quiz</a>
           </div>
-
-          <div class="trim-tabs trim-tabs-sticky" id="adultTabs"></div>
-
-          <div class="class-layout">
-            <aside class="video-section" id="adult-video">
-              <div class="video-universal-container">
-                <div class="video-responsive-wrapper">
-                  <iframe id="adultVideoIframe" src="https://www.youtube.com/embed/tQg7bmcS4yM?rel=0" allowfullscreen></iframe>
-                </div>
-              </div>
-            </aside>
-
-            <div class="panel-side">
-              <h5><i class="fas fa-calendar-week"></i> Lições por trimestre</h5>
-              <div class="trim-hint">Selecione um trimestre para visualizar as lições disponíveis.</div>
-              <div class="lessons-grid" id="adultLessonsContainer">
-                <div class="empty-message">📖 Selecione um trimestre para ver as lições.</div>
-              </div>
+          <div class="class-body">
+            <div class="trim-tabs" id="adultTabs"></div>
+            <div class="lessons-grid" id="adultLessonsContainer">
+              <div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Selecione um trimestre</div></div>
             </div>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <section class="section" id="youth-class">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <h3>Classe Jovens</h3>
-            <p>Lições com linguagem atual, apresentação dinâmica e aplicações práticas para a juventude cristã.</p>
           </div>
         </div>
+      </section>
 
-        <section class="class-section">
-          <div class="class-head">
+      <!-- CLASSE JOVENS -->
+      <section class="section" id="youth-class">
+        <div class="class-card">
+          <div class="class-header">
             <div class="class-title">
-              <div class="class-icon"><i class="fas fa-people-group"></i></div>
+              <div class="class-icon"><i class="fas fa-users"></i></div>
               <div>
-                <h4>Conectar Jovens</h4>
-                <p>Conteúdo bíblico fiel com uma abordagem mais conectada ao público jovem.</p>
+                <h4>Classe Jovens</h4>
+                <p>Linguagem atual, conteúdo relevante</p>
               </div>
             </div>
-
-            <div class="quick-links">
-              <a href="https://ebdfiel.github.io/Quizzes-ConectarJovens-/" target="_blank" class="quick-link quiz"><i class="fas fa-users"></i> Quiz</a>
+            <a href="https://ebdfiel.github.io/Quizzes-ConectarJovens-/" target="_blank" class="quiz-link"><i class="fas fa-brain"></i> Quiz</a>
+          </div>
+          <div class="class-body">
+            <div class="trim-tabs" id="youthTabs"></div>
+            <div class="lessons-grid" id="youthLessonsContainer">
+              <div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Selecione um trimestre</div></div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="trim-tabs trim-tabs-sticky" id="youthTabs"></div>
-
-          <div class="class-layout">
-            <aside class="video-section" id="youth-video">
-              <div class="video-universal-container">
-                <div class="video-responsive-wrapper">
-                  <iframe id="youthVideoIframe" src="https://www.youtube.com/embed/uCCysCorUok?rel=0" allowfullscreen></iframe>
-                </div>
-              </div>
-            </aside>
-
-            <div class="panel-side">
-              <h5><i class="fas fa-calendar-week"></i> Lições por trimestre</h5>
-              <div class="trim-hint">Selecione um trimestre para visualizar as lições disponíveis.</div>
-              <div class="lessons-grid" id="youthLessonsContainer">
-                <div class="empty-message">📖 Selecione um trimestre para ver as lições.</div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="container">
-        <section class="about-section">
+      <!-- SOBRE -->
+      <section class="section" id="about">
+        <div class="about-section">
           <div class="about-grid">
             <div class="about-text">
               <h3>Sobre a EBD Fiel</h3>
-              <p>Projeto dedicado a fornecer material bíblico de qualidade para as Escolas Bíblicas Dominicais, com organização visual melhor, leitura confortável e acesso fácil aos estudos.</p>
-
-              <div class="about-features">
+              <p>A EBD Fiel nasceu do desejo de oferecer material bíblico de qualidade para a Escola Bíblica Dominical, com conteúdo que une profundidade teológica e aplicação prática para o dia a dia.</p>
+              <div class="features-grid">
                 <div class="feature">
                   <div class="feature-icon"><i class="fas fa-book-open"></i></div>
                   <div class="feature-text">
                     <h4>Estudo Exegético</h4>
-                    <p>Análise cuidadosa do texto bíblico com foco em fidelidade às Escrituras.</p>
+                    <p>Análise cuidadosa do texto bíblico</p>
                   </div>
                 </div>
-
                 <div class="feature">
-                  <div class="feature-icon"><i class="fas fa-users"></i></div>
+                  <div class="feature-icon"><i class="fas fa-chalkboard-user"></i></div>
                   <div class="feature-text">
-                    <h4>Para Todos</h4>
-                    <p>Conteúdos organizados para adultos e jovens em uma navegação simples.</p>
+                    <h4>Apoio Pedagógico</h4>
+                    <p>Recursos para professores</p>
                   </div>
                 </div>
-
                 <div class="feature">
-                  <div class="feature-icon"><i class="fas fa-mobile-screen"></i></div>
+                  <div class="feature-icon"><i class="fas fa-heart"></i></div>
                   <div class="feature-text">
-                    <h4>Melhor Navegação</h4>
-                    <p>Mais clareza visual, mais espaço para leitura e menos poluição de interface.</p>
+                    <h4>Aplicação Prática</h4>
+                    <p>Vivendo a Palavra hoje</p>
                   </div>
                 </div>
-
                 <div class="feature">
-                  <div class="feature-icon"><i class="fas fa-sliders"></i></div>
+                  <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
                   <div class="feature-text">
-                    <h4>Painel Admin</h4>
-                    <p>Edição local rápida com controle de disponibilidade e exportação dos dados.</p>
+                    <h4>App Offline</h4>
+                    <p>Acesse sem internet</p>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="about-image">
-              <div class="about-image-content">
-                <i class="fas fa-bible"></i>
-                <h3>“Examinai as Escrituras”</h3>
-                <p>João 5:39</p>
-              </div>
+            <div class="about-quote">
+              <i class="fas fa-quote-right"></i>
+              <h4>"Examinai as Escrituras"</h4>
+              <p style="margin-top: 8px;">João 5:39</p>
+              <hr style="margin: 20px 0; border-color: var(--border);">
+              <p style="font-size: 0.85rem;">"Fiel à Palavra. Relevante para hoje."</p>
             </div>
-          </div>
-        </section>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>EBD Fiel</h3>
-          <p>Material bíblico fiel para fortalecer a Escola Bíblica Dominical.</p>
-          <div class="social-icons">
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
+      </section>
+    </div>
+  </main>
 
-        <div class="footer-column">
-          <h3>Links</h3>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>EBD Fiel</h4>
+          <p>Material bíblico fiel para fortalecer a Escola Bíblica Dominical.</p>
+          <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Links Rápidos</h4>
           <p><a href="#home">Início</a></p>
           <p><a href="#adult-class">Adultos</a></p>
           <p><a href="#youth-class">Jovens</a></p>
           <p><a href="#about">Sobre</a></p>
         </div>
-
-        <div class="footer-column">
-          <h3>Atualizações</h3>
-          <p><a href="#" id="checkUpdatesBtn" style="cursor: pointer;">Verificar atualizações</a></p>
-          <p><small>Versão: 3.0</small></p>
+        <div class="footer-col">
+          <h4>Ferramentas</h4>
+          <p><button class="clear-cache-btn" id="clearCacheBtn"><i class="fas fa-broom"></i> Limpar cache</button></p>
+          <p><a href="#" id="checkUpdatesBtn">Verificar atualizações</a></p>
         </div>
       </div>
-
-      <div class="copyright">&copy; 2026 EBD Fiel - Todos os direitos reservados.</div>
+      <div class="copyright">
+        &copy; 2026 EBD Fiel - Todos os direitos reservados.
+      </div>
     </div>
   </footer>
 
-  <nav class="bottom-app-nav" aria-label="Navegação inferior">
-    <a href="#home" class="bottom-nav-link active" data-target="home">
-      <i class="fas fa-house"></i>
-      <span>Início</span>
-    </a>
-    <a href="#adult-class" class="bottom-nav-link" data-target="adult-class">
-      <i class="fas fa-book-open"></i>
-      <span>Adultos</span>
-    </a>
-    <a href="#youth-class" class="bottom-nav-link" data-target="youth-class">
-      <i class="fas fa-users"></i>
-      <span>Jovens</span>
-    </a>
-    <a href="#about" class="bottom-nav-link" data-target="about">
-      <i class="fas fa-circle-info"></i>
-      <span>Sobre</span>
-    </a>
-    <button id="installBottomBtn" class="bottom-nav-link" style="display:none; border:0; background:none;" type="button">
-      <i class="fas fa-download"></i>
-      <span>Instalar</span>
-    </button>
-  </nav>
+  <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+      <div style="background: var(--bg-card); padding: 24px; border-radius: 16px; text-align: center;">
+        <div class="loading-spinner" style="width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;"></div>
+        <strong>Abrindo lição...</strong>
+        <p style="font-size: 0.8rem; margin-top: 8px;">Preparando o conteúdo</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 
   <script>
     // ==================== CONFIGURAÇÕES INICIAIS ====================
     let adultLessons = [];
     let youthLessons = [];
-    let allLessons = [];
     let adminOverrides = {};
     let contentOverrides = {};
     const introSummaryCache = new Map();
-
     let activeAdultTrim = null;
     let activeYouthTrim = null;
-    let swRegistration = null;
-
-    // ==================== GOOGLE ANALYTICS ====================
-    function initGA() {
-      const settings = localStorage.getItem("ebd_settings");
-      if(settings) {
-        const config = JSON.parse(settings);
-        if(config.ga && config.ga.id) {
-          console.log('[GA] Google Analytics ativo com ID:', config.ga.id);
-        }
-      }
-    }
 
     // ==================== MODO ESCURO/CLARO ====================
     function initTheme() {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
+      const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
       updateThemeIcon(savedTheme);
     }
@@ -2020,7 +978,6 @@
     function updateThemeIcon(theme) {
       const themeBtn = document.getElementById('themeToggle');
       if (!themeBtn) return;
-      
       const icon = themeBtn.querySelector('i');
       if (theme === 'dark') {
         icon.className = 'fas fa-sun';
@@ -2032,61 +989,31 @@
     function toggleTheme() {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
       document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
       updateThemeIcon(newTheme);
-      
-      document.body.style.transition = 'background-color 0.3s, color 0.3s';
-      setTimeout(() => {
-        document.body.style.transition = '';
-      }, 300);
     }
 
     // ==================== FUNÇÕES DE OVERRIDE ====================
     function loadOverrides() {
       const storedAdmin = localStorage.getItem("ebd_admin_overrides");
       const storedContent = localStorage.getItem("ebd_content_overrides");
-
-      if (storedAdmin) {
-        try {
-          adminOverrides = JSON.parse(storedAdmin);
-        } catch (e) {
-          adminOverrides = {};
-        }
-      }
-
-      if (storedContent) {
-        try {
-          contentOverrides = JSON.parse(storedContent);
-        } catch (e) {
-          contentOverrides = {};
-        }
-      }
-    }
-
-    function saveOverrides() {
-      localStorage.setItem("ebd_admin_overrides", JSON.stringify(adminOverrides));
-      localStorage.setItem("ebd_content_overrides", JSON.stringify(contentOverrides));
+      if (storedAdmin) { try { adminOverrides = JSON.parse(storedAdmin); } catch(e) { adminOverrides = {}; } }
+      if (storedContent) { try { contentOverrides = JSON.parse(storedContent); } catch(e) { contentOverrides = {}; } }
     }
 
     function applyContentOverrides(lesson) {
       const key = `${lesson.tipo}:${lesson.id}`;
       if (!contentOverrides[key]) return lesson;
-
       const override = contentOverrides[key];
-
       if (override.conteudo !== undefined) {
         const updatedLesson = { ...lesson, conteudo: override.conteudo };
         const titleMatch = updatedLesson.conteudo.match(/<h1[^>]*>(.*?)<\/h1>/i);
-        updatedLesson.titulo = titleMatch && titleMatch[1]
-          ? titleMatch[1].trim()
-          : (override.titulo || lesson.titulo);
+        updatedLesson.titulo = titleMatch && titleMatch[1] ? titleMatch[1].trim() : (override.titulo || lesson.titulo);
         return updatedLesson;
       } else if (override.titulo !== undefined) {
         return { ...lesson, titulo: override.titulo };
       }
-
       return lesson;
     }
 
@@ -2113,9 +1040,7 @@
 
     function isLessonAvailable(lesson) {
       const key = `${lesson.tipo}:${lesson.id}`;
-      if (Object.prototype.hasOwnProperty.call(adminOverrides, key)) {
-        return adminOverrides[key];
-      }
+      if (adminOverrides[key] !== undefined) return adminOverrides[key];
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       return today >= getReleaseDate(lesson.data);
@@ -2125,340 +1050,166 @@
     function getIntroSummary(html, cacheKey = "") {
       const key = cacheKey || html;
       if (introSummaryCache.has(key)) return introSummaryCache.get(key);
-
       let result = "Clique para abrir o conteúdo completo da lição.";
-
       if (html) {
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = html;
         tempDiv.querySelectorAll("style, script, link").forEach(tag => tag.remove());
-
-        const headings = tempDiv.querySelectorAll("h1, h2, h3, h4, h5, h6");
-        for (const heading of headings) {
-          const headingText = heading.innerText.trim().toLowerCase();
-          if (headingText.includes("introdução") || headingText.includes("introducao")) {
-            let introText = "";
-            let nextElement = heading.nextElementSibling;
-
-            while (nextElement && !/^H[1-6]$/i.test(nextElement.tagName)) {
-              introText += nextElement.innerText + " ";
-              nextElement = nextElement.nextElementSibling;
-            }
-
-            if (introText.trim()) {
-              introText = introText.replace(/\s+/g, " ").trim();
-              result = introText.length > 200 ? introText.substring(0, 200) + "..." : introText;
-              introSummaryCache.set(key, result);
-              return result;
-            }
-            break;
-          }
-        }
-
         const firstParagraph = tempDiv.querySelector("p");
         if (firstParagraph && firstParagraph.innerText.trim()) {
           let text = firstParagraph.innerText.trim();
           result = text.length > 200 ? text.substring(0, 200) + "..." : text;
         }
       }
-
       introSummaryCache.set(key, result);
       return result;
     }
 
-    // ==================== FUNÇÃO PARA DETERMINAR O TRIMESTRE ATUAL ====================
+    // ==================== TRIMESTRE ATUAL ====================
     function getCurrentTrimestre() {
       const dataAtual = new Date();
       const mes = dataAtual.getMonth() + 1;
-      
-      if (mes >= 1 && mes <= 3) {
-        return 1;
-      } else if (mes >= 4 && mes <= 6) {
-        return 2;
-      } else if (mes >= 7 && mes <= 9) {
-        return 3;
-      } else {
-        return 4;
-      }
+      if (mes >= 1 && mes <= 3) return 1;
+      else if (mes >= 4 && mes <= 6) return 2;
+      else if (mes >= 7 && mes <= 9) return 3;
+      else return 4;
     }
 
-    // ==================== FUNÇÃO PARA ROLAR PARA O TOPO ====================
+    // ==================== SCROLL ====================
     function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // ==================== FUNÇÃO CORRIGIDA PARA VOLTAR AO TOPO ====================
     function scrollToSection(sectionId) {
-      sessionStorage.removeItem("voltarPara");
-      
       const element = document.getElementById(sectionId);
       if (element) {
-        if (sectionId === "home") {
-          scrollToTop();
-        } else {
-          const offset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.scrollY - offset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-        }
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - offset;
+        window.scrollTo({ top: Math.max(offsetPosition, 0), behavior: "smooth" });
       } else {
         scrollToTop();
       }
     }
 
-    // ==================== FUNÇÃO PARA ROLAR ATÉ AS LIÇÕES ====================
-    function scrollToLessons(tipo, trimestre) {
-      setTimeout(() => {
-        const targetContainer = document.getElementById(`${tipo}LessonsContainer`);
-        const stickyTabs = document.getElementById(`${tipo}Tabs`);
-        const topbar = document.querySelector(".topbar");
-        
-        if (targetContainer) {
-          const stickyHeight = stickyTabs ? stickyTabs.offsetHeight : 0;
-          const topbarHeight = topbar ? topbar.offsetHeight : 0;
-          const extraOffset = 20;
-          
-          let targetTop = targetContainer.getBoundingClientRect().top + window.scrollY;
-          targetTop = targetTop - topbarHeight - stickyHeight - extraOffset;
-          
-          window.scrollTo({
-            top: Math.max(targetTop, 0),
-            behavior: "smooth"
-          });
-          
-          setTimeout(() => {
-            const currentScroll = window.scrollY;
-            if (Math.abs(currentScroll - targetTop) > 50) {
-              window.scrollTo({
-                top: Math.max(targetTop, 0),
-                behavior: "auto"
-              });
-            }
-          }, 500);
-        }
-      }, 200);
-    }
-
     // ==================== CARREGAR DADOS ====================
     async function carregarDados() {
       try {
-        const response = await fetch("./lessons.json", { cache: "default" });
+        const response = await fetch("./lessons.json?t=" + Date.now());
         if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-
         const data = await response.json();
-
         adultLessons = data.adult || [];
         youthLessons = data.youth || [];
-
         let nextId = 1;
-        adultLessons.forEach(lesson => {
-          lesson.id = nextId++;
-          lesson.tipo = "adult";
-        });
-        youthLessons.forEach(lesson => {
-          lesson.id = nextId++;
-          lesson.tipo = "youth";
-        });
-
-        allLessons = [...adultLessons, ...youthLessons];
-
+        adultLessons.forEach(lesson => { lesson.id = nextId++; lesson.tipo = "adult"; });
+        youthLessons.forEach(lesson => { lesson.id = nextId++; lesson.tipo = "youth"; });
         criarAbas("adult", adultLessons);
         criarAbas("youth", youthLessons);
+        atualizarStats();
       } catch (error) {
         console.error("Erro ao carregar lessons.json:", error);
-        document.getElementById("adultLessonsContainer").innerHTML = '<div class="empty-message">Erro ao carregar as lições de adultos.</div>';
-        document.getElementById("youthLessonsContainer").innerHTML = '<div class="empty-message">Erro ao carregar as lições de jovens.</div>';
       }
     }
 
-    // ==================== CRIAR ABAS COM SELEÇÃO DO TRIMESTRE ATUAL ====================
+    function atualizarStats() {
+      const total = adultLessons.length + youthLessons.length;
+      document.getElementById("totalLessons").innerHTML = total;
+    }
+
+    // ==================== CRIAR ABAS ====================
     function criarAbas(tipo, lista) {
       const trimestresExistentes = [...new Set(lista.map(l => Number(l.trimestre)))].sort((a, b) => a - b);
       const todosTrimestres = [1, 2, 3, 4];
       const currentTrim = getCurrentTrimestre();
-      
       const tabsContainer = document.getElementById(`${tipo}Tabs`);
       const lessonsContainer = document.getElementById(`${tipo}LessonsContainer`);
-
       if (!tabsContainer || !lessonsContainer) return;
-
       tabsContainer.innerHTML = "";
 
       todosTrimestres.forEach(trim => {
         const temLicoes = trimestresExistentes.includes(trim);
         const btn = document.createElement("button");
         btn.className = `tab-btn trim-q${trim}`;
-        btn.type = "button";
-        btn.innerHTML = `<i class="fas fa-calendar-alt"></i> ${trim}º Trimestre`;
-        
-        if (trim === currentTrim) {
-          btn.style.position = "relative";
-          btn.style.border = "2px solid #f7b24d";
-          btn.style.boxShadow = "0 0 0 2px rgba(247,178,77,0.3)";
-          btn.title = "Trimestre atual";
-        }
-        
-        if (!temLicoes) {
-          btn.style.opacity = "0.6";
-          btn.title = (trim === currentTrim ? "Trimestre atual - " : "") + "Nenhuma lição cadastrada para este trimestre";
-        }
-
-        btn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          
+        if (trim === currentTrim) btn.classList.add("trim-atual");
+        btn.innerHTML = `${trim}º Trimestre`;
+        if (!temLicoes) btn.style.opacity = "0.5";
+        btn.addEventListener("click", () => {
           document.querySelectorAll(`#${tipo}Tabs .tab-btn`).forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
-
           if (tipo === "adult") activeAdultTrim = trim;
           else activeYouthTrim = trim;
-
           const { adults, youths } = getFinalLessons();
           const source = tipo === "adult" ? adults : youths;
           const licoesDoTrimestre = source.filter(l => Number(l.trimestre) === Number(trim));
-          
           renderizarLicoes(tipo, licoesDoTrimestre, trim);
-          scrollToLessons(tipo, trim);
         });
-
         tabsContainer.appendChild(btn);
       });
 
       let trimestreParaAtivar = currentTrim;
-      
       const { adults, youths } = getFinalLessons();
       const source = tipo === "adult" ? adults : youths;
       const temLicoesNoTrimestreAtual = source.some(l => Number(l.trimestre) === currentTrim);
-      
       if (!temLicoesNoTrimestreAtual && trimestresExistentes.length > 0) {
         trimestreParaAtivar = trimestresExistentes[0];
       }
-      
       const btnToActivate = tabsContainer.querySelector(`.tab-btn.trim-q${trimestreParaAtivar}`);
-      if (btnToActivate) {
-        setTimeout(() => {
-          btnToActivate.click();
-        }, 100);
-      } else if (trimestresExistentes.length > 0) {
-        const primeiroTrim = trimestresExistentes[0];
-        const fallbackBtn = tabsContainer.querySelector(`.tab-btn.trim-q${primeiroTrim}`);
-        if (fallbackBtn) {
-          setTimeout(() => {
-            fallbackBtn.click();
-          }, 100);
-        }
-      } else {
-        lessonsContainer.innerHTML = '<div class="empty-message">📖 Selecione um trimestre para ver as lições.</div>';
-      }
+      if (btnToActivate) setTimeout(() => btnToActivate.click(), 100);
+      else lessonsContainer.innerHTML = '<div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Selecione um trimestre</div></div>';
     }
 
     // ==================== RENDERIZAR LIÇÕES ====================
     function renderizarLicoes(tipo, lista, trimestre) {
       const container = document.getElementById(`${tipo}LessonsContainer`);
       if (!container) return;
-
       if (!lista.length) {
-        container.innerHTML = `<div class="empty-message">📖 Nenhuma lição cadastrada para o ${trimestre}º trimestre.</div>`;
+        container.innerHTML = `<div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Nenhuma lição para o ${trimestre}º trimestre</div></div>`;
         return;
       }
-
       const listaOrdenada = [...lista].sort((a, b) => a.numero - b.numero);
-
       container.innerHTML = "";
-
       listaOrdenada.forEach(licao => {
         const available = isLessonAvailable(licao);
-        const card = document.createElement("article");
-        card.className = "lesson-card fade-in";
-        card.setAttribute("data-lesson-id", licao.id);
-        card.setAttribute("data-lesson-tipo", licao.tipo);
-
         const badgeClass = available ? "available" : "preparation";
         const badgeText = available ? "Disponível" : "Em breve";
         const introSummary = getIntroSummary(licao.conteudo, `${licao.tipo}:${licao.id}:${licao.titulo}`);
-
+        const card = document.createElement("div");
+        card.className = "lesson-card";
         card.innerHTML = `
           <span class="status-badge ${badgeClass}">${badgeText}</span>
-
           <div class="lesson-top">
             <span class="lesson-quarter"><i class="fas fa-calendar-alt"></i> ${licao.trimestre}º Trimestre</span>
             <div class="lesson-number">Lição ${String(licao.numero).padStart(2, "0")}</div>
             <div class="lesson-title">${licao.titulo}</div>
           </div>
-
           <div class="lesson-body">
-            <div class="lesson-date">
-              <i class="far fa-calendar-alt"></i> ${licao.data || ""}
-            </div>
-
+            <div class="lesson-date"><i class="far fa-calendar-alt"></i> ${licao.data || ""}</div>
             <div class="lesson-description">${introSummary}</div>
-
-            <div class="lesson-footer">
-              ${
-                available
-                  ? `
-                    <button class="lesson-action primary view-btn" data-id="${licao.id}" data-tipo="${licao.tipo}">
-                      <i class="fas fa-book-open"></i> Ver lição
-                    </button>
-                    <button class="lesson-action secondary-ghost view-btn" data-id="${licao.id}" data-tipo="${licao.tipo}" aria-label="Abrir lição">
-                      <i class="fas fa-arrow-right"></i>
-                    </button>
-                  `
-                  : `
-                    <button class="lesson-action primary" disabled>
-                      <i class="fas fa-clock"></i> Em breve
-                    </button>
-                    <button class="lesson-action secondary-ghost disabled" disabled aria-label="Indisponível">
-                      <i class="fas fa-lock"></i>
-                    </button>
-                  `
-              }
-            </div>
+            ${available ? `<button class="view-btn" data-id="${licao.id}" data-tipo="${licao.tipo}"><i class="fas fa-book-open"></i> Ver lição</button>` : `<button class="view-btn" disabled><i class="fas fa-clock"></i> Em breve</button>`}
           </div>
         `;
-
         container.appendChild(card);
       });
-
       attachCardClicks(tipo);
     }
 
     function attachCardClicks(tipo) {
       document.querySelectorAll(`#${tipo}LessonsContainer .view-btn`).forEach(btn => {
+        if (btn.disabled) return;
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const id = parseInt(btn.dataset.id);
           const tipoLesson = btn.dataset.tipo;
           const { adults, youths } = getFinalLessons();
-          const all = [...adults, ...youths];
-          const lesson = all.find(l => l.id === id && l.tipo === tipoLesson);
-          if (lesson) {
-            if(typeof gtag !== 'undefined') {
-              gtag('event', 'abrir_licao', {
-                'event_category': 'engajamento',
-                'event_label': lesson.titulo,
-                'value': lesson.numero
-              });
-            }
-            abrirNovaGuia(lesson);
-          }
+          const lesson = [...adults, ...youths].find(l => l.id === id && l.tipo === tipoLesson);
+          if (lesson) abrirNovaGuia(lesson);
         });
       });
-      
       document.querySelectorAll(`#${tipo}LessonsContainer .lesson-card`).forEach(card => {
         card.addEventListener("click", e => {
           if (e.target.closest(".view-btn")) return;
-          const viewBtn = card.querySelector(".view-btn:not(.disabled)");
-          if (viewBtn && !viewBtn.disabled) {
-            viewBtn.click();
-          }
+          const viewBtn = card.querySelector(".view-btn:not(:disabled)");
+          if (viewBtn && !viewBtn.disabled) viewBtn.click();
         });
       });
     }
@@ -2466,782 +1217,92 @@
     // ==================== ABRIR LIÇÃO ====================
     function showLoadingOverlay() {
       const overlay = document.getElementById("loadingOverlay");
-      if (overlay) overlay.classList.add("show");
+      if (overlay) overlay.style.display = "flex";
     }
 
     function hideLoadingOverlay() {
       const overlay = document.getElementById("loadingOverlay");
-      if (overlay) overlay.classList.remove("show");
+      if (overlay) overlay.style.display = "none";
     }
 
     function abrirNovaGuia(licao) {
-      if (!licao) {
-        alert("Erro: lição inválida");
-        return;
-      }
-
+      if (!licao) return;
       try {
         sessionStorage.setItem("licaoAtual", JSON.stringify(licao));
-        const destino = licao.tipo === "youth" ? "#youth-class" : "#adult-class";
-        sessionStorage.setItem("voltarPara", destino);
-      } catch (e) {
-        console.error("Erro ao salvar a lição:", e);
-        alert("Não foi possível abrir a lição agora.");
-        return;
-      }
-
+        sessionStorage.setItem("voltarPara", licao.tipo === "youth" ? "#youth-class" : "#adult-class");
+      } catch (e) { console.error(e); return; }
       showLoadingOverlay();
-      document.body.classList.add("page-leaving");
-
-      setTimeout(() => {
-        window.location.href = "./licao.html";
-      }, 250);
+      setTimeout(() => { window.location.href = "./licao.html"; }, 200);
     }
 
-    // ==================== REDES SOCIAIS ====================
-    function loadSocialLinks() {
-      const settings = localStorage.getItem("ebd_settings");
-      if (settings) {
-        try {
-          const config = JSON.parse(settings);
-          if (config.social) {
-            if (config.social.instagram) {
-              document.querySelectorAll('.social-icons-top a[aria-label="Instagram"], .social-icons a[aria-label="Instagram"]').forEach(link => {
-                link.href = config.social.instagram;
-              });
-            }
-            if (config.social.facebook) {
-              document.querySelectorAll('.social-icons-top a[aria-label="Facebook"], .social-icons a[aria-label="Facebook"]').forEach(link => {
-                link.href = config.social.facebook;
-              });
-            }
-            if (config.social.youtube) {
-              document.querySelectorAll('.social-icons-top a[aria-label="YouTube"], .social-icons a[aria-label="YouTube"]').forEach(link => {
-                link.href = config.social.youtube;
-              });
-            }
-            if (config.social.tiktok) {
-              document.querySelectorAll('.social-icons-top a[aria-label="TikTok"]').forEach(link => {
-                link.href = config.social.tiktok;
-              });
-            }
-          }
-          if (config.videos) {
-            if (config.videos.adult) {
-              const adultIframe = document.getElementById("adultVideoIframe");
-              if (adultIframe) adultIframe.src = `https://www.youtube.com/embed/${config.videos.adult}?rel=0`;
-            }
-            if (config.videos.youth) {
-              const youthIframe = document.getElementById("youthVideoIframe");
-              if (youthIframe) youthIframe.src = `https://www.youtube.com/embed/${config.videos.youth}?rel=0`;
-            }
-          }
-        } catch(e) {
-          console.error("Erro ao carregar configurações:", e);
+    // ==================== LIMPAR CACHE ====================
+    function limparCache() {
+      if (confirm('⚠️ ATENÇÃO!\n\nIsso irá limpar o cache do navegador e recarregar a página. Deseja continuar?')) {
+        localStorage.clear();
+        sessionStorage.clear();
+        if ('caches' in window) {
+          caches.keys().then(keys => keys.forEach(key => caches.delete(key)));
         }
+        alert('Cache limpo! A página será recarregada.');
+        window.location.reload(true);
       }
     }
 
-    // ==================== PARTÍCULAS ====================
-    const canvas = document.getElementById("particles");
-    const ctx = canvas ? canvas.getContext("2d", { alpha: true }) : null;
-
-    let particles = [];
-    let particlesAnimationId = null;
-    let particlesRunning = false;
-    let lastFrameTime = 0;
-
-    function createParticle(width, height, isMobile) {
-      return {
-        x: Math.random() * width,
-        y: Math.random() * height,
-        r: isMobile ? (Math.random() * 2.4 + 0.9) : (Math.random() * 2 + 0.4),
-        speedY: isMobile ? (Math.random() * 22 + 10) : (Math.random() * 18 + 8),
-        driftX: (Math.random() - 0.5) * (isMobile ? 6 : 4),
-        o: isMobile ? (Math.random() * 0.22 + 0.10) : (Math.random() * 0.18 + 0.08)
-      };
-    }
-
-    function resizeCanvas() {
-      if (!canvas || !ctx) return;
-
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const isMobile = width < 768;
-
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
-      canvas.style.width = width + "px";
-      canvas.style.height = height + "px";
-
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      const total = isMobile ? 72 : 96;
-      particles = Array.from({ length: total }, () => createParticle(width, height, isMobile));
-    }
-
-    function drawParticleGlow(p) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 2.2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(247, 178, 77, ${p.o * 0.18})`;
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(247, 178, 77, ${p.o})`;
-      ctx.fill();
-    }
-
-    function drawParticles(now = 0) {
-      if (!canvas || !ctx || !particlesRunning) return;
-
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      if (!lastFrameTime) lastFrameTime = now;
-      const delta = Math.min((now - lastFrameTime) / 1000, 0.033);
-      lastFrameTime = now;
-
-      ctx.clearRect(0, 0, width, height);
-
-      for (const p of particles) {
-        p.y += p.speedY * delta;
-        p.x += p.driftX * delta;
-
-        if (p.y > height + 8) {
-          p.y = -8;
-          p.x = Math.random() * width;
-        }
-
-        if (p.x < -8) p.x = width + 8;
-        if (p.x > width + 8) p.x = -8;
-
-        drawParticleGlow(p);
-      }
-
-      particlesAnimationId = requestAnimationFrame(drawParticles);
-    }
-
-    function startParticles() {
-      if (particlesRunning || !canvas || !ctx) return;
-      particlesRunning = true;
-      lastFrameTime = 0;
-      particlesAnimationId = requestAnimationFrame(drawParticles);
-    }
-
-    function stopParticles() {
-      particlesRunning = false;
-      lastFrameTime = 0;
-
-      if (particlesAnimationId) {
-        cancelAnimationFrame(particlesAnimationId);
-        particlesAnimationId = null;
-      }
-    }
-
-    // ==================== INSTALAÇÃO DO APP ====================
-    let deferredInstallPrompt = null;
-    let isAppInstalled = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-
-    function getInstallButtons() {
-      return [
-        document.getElementById("installTopBtn"),
-        document.getElementById("installAppBtn"),
-        document.getElementById("installBottomBtn")
-      ].filter(Boolean);
-    }
-
-    function setInstallButtonContent(iconClass, label) {
-      getInstallButtons().forEach(btn => {
-        if (btn.id === "installBottomBtn") {
-          const icon = btn.querySelector("i");
-          const text = btn.querySelector("span");
-          if (icon) icon.className = iconClass;
-          if (text) text.textContent = label;
-        } else {
-          btn.innerHTML = `<i class="${iconClass}"></i> ${label}`;
-        }
-      });
-    }
-
-    function showInstallButtons() {
-      getInstallButtons().forEach(btn => {
-        btn.style.display = "inline-flex";
-      });
-    }
-
-    function hideInstallButtons() {
-      getInstallButtons().forEach(btn => {
-        btn.style.display = "none";
-      });
-    }
-
-    function setInstallButtonsDisabled(disabled) {
-      getInstallButtons().forEach(btn => {
-        btn.disabled = disabled;
-        btn.style.opacity = disabled ? "0.7" : "";
-        btn.style.cursor = disabled ? "not-allowed" : "";
-      });
-    }
-
-    function isIosDevice() {
-      return /iphone|ipad|ipod/i.test(navigator.userAgent);
-    }
-
-    function canShowManualInstallHint() {
-      return isIosDevice() || /safari/i.test(navigator.userAgent) || /firefox/i.test(navigator.userAgent);
-    }
-
-    function updateInstallUI() {
-      if (isAppInstalled) {
-        showInstallButtons();
-        setInstallButtonsDisabled(true);
-        setInstallButtonContent("fas fa-check", "Instalado");
-        return;
-      }
-
-      if (deferredInstallPrompt) {
-        showInstallButtons();
-        setInstallButtonsDisabled(false);
-        setInstallButtonContent("fas fa-download", "Instalar");
-        return;
-      }
-
-      if (canShowManualInstallHint()) {
-        showInstallButtons();
-        setInstallButtonsDisabled(false);
-        setInstallButtonContent("fas fa-mobile-screen-button", "Como instalar");
-        return;
-      }
-
-      hideInstallButtons();
-    }
-
-    function showInstallHelp() {
-      if (isIosDevice()) {
-        alert("No iPhone ou iPad, toque em Compartilhar e depois em \"Adicionar à Tela de Início\".");
-        return;
-      }
-
-      alert("Se o navegador não exibiu o prompt automático, use o menu do navegador e procure por \"Instalar aplicativo\", \"Adicionar à tela inicial\" ou opção semelhante.");
-    }
-
-    async function installApp() {
-      if (isAppInstalled) return;
-
-      if (!deferredInstallPrompt) {
-        showInstallHelp();
-        return;
-      }
-
-      setInstallButtonsDisabled(true);
-      setInstallButtonContent("fas fa-spinner fa-spin", "Instalando");
-
-      try {
-        deferredInstallPrompt.prompt();
-        const choice = await deferredInstallPrompt.userChoice;
-
-        if (choice.outcome === "accepted") {
-          setInstallButtonContent("fas fa-check", "Instalado");
-        } else {
-          setInstallButtonContent("fas fa-download", "Instalar");
-          setInstallButtonsDisabled(false);
-        }
-      } catch (error) {
-        console.error("Erro ao abrir prompt de instalação:", error);
-        setInstallButtonContent("fas fa-download", "Instalar");
-        setInstallButtonsDisabled(false);
-      }
-
-      deferredInstallPrompt = null;
-      updateInstallUI();
-    }
-
-    // ==================== ATUALIZAÇÃO AUTOMÁTICA DO PWA ====================
-    let newWorkerWaiting = null;
-    let updateToast = null;
-
-    function showUpdateNotification() {
-      if (!updateToast) {
-        updateToast = document.createElement('div');
-        updateToast.style.cssText = `
-          position: fixed;
-          bottom: 100px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: linear-gradient(135deg, #f7b24d, #ff9800);
-          color: #102131;
-          padding: 14px 24px;
-          border-radius: 60px;
-          font-weight: 800;
-          font-size: 0.95rem;
-          z-index: 10000;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255,255,255,0.3);
-          animation: slideUp 0.3s ease;
-        `;
-        updateToast.innerHTML = `
-          <i class="fas fa-sync-alt"></i>
-          <span>Nova versão disponível! Clique para atualizar</span>
-        `;
-        updateToast.onclick = () => {
-          if (newWorkerWaiting) {
-            newWorkerWaiting.postMessage('skipWaiting');
-            setTimeout(() => {
-              window.location.reload();
-            }, 100);
-          }
-        };
-        document.body.appendChild(updateToast);
-        
-        if (!document.querySelector('#toast-keyframes')) {
-          const style = document.createElement('style');
-          style.id = 'toast-keyframes';
-          style.textContent = `
-            @keyframes slideUp {
-              from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-              }
-              to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-              }
-            }
-          `;
-          document.head.appendChild(style);
-        }
-      } else {
-        updateToast.style.display = 'flex';
-        updateToast.style.opacity = '1';
-      }
-      
-      setTimeout(() => {
-        if (updateToast) {
-          updateToast.style.opacity = '0';
-          setTimeout(() => {
-            if (updateToast) updateToast.style.display = 'none';
-            if (updateToast) updateToast.style.opacity = '';
-          }, 300);
-        }
-      }, 10000);
-    }
-
+    // ==================== ATUALIZAÇÕES ====================
     async function checkForUpdates() {
       if ('serviceWorker' in navigator) {
         const registration = await navigator.serviceWorker.getRegistration();
-        if (registration) {
-          console.log('[App] Verificando atualizações...');
-          await registration.update();
-        }
+        if (registration) await registration.update();
       }
+      alert('Verificando atualizações... Se houver uma nova versão, ela será instalada em breve.');
     }
 
-    function setupAutoUpdate() {
-      if (!('serviceWorker' in navigator)) return;
-      
-      let refreshing = false;
-      
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (refreshing) return;
-        refreshing = true;
-        console.log('[App] Service worker atualizado, recarregando...');
-        window.location.reload();
-      });
-      
-      setInterval(() => {
-        checkForUpdates();
-      }, 30 * 60 * 1000);
-      
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-          console.log('[App] Página visível, verificando atualizações...');
-          checkForUpdates();
-        }
-      });
-      
-      navigator.serviceWorker.ready.then(registration => {
-        registration.addEventListener('updatefound', () => {
-          newWorkerWaiting = registration.installing;
-          console.log('[App] Nova versão detectada!');
-          
-          newWorkerWaiting.addEventListener('statechange', () => {
-            if (newWorkerWaiting.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('[App] Nova versão pronta para instalar');
-              showUpdateNotification();
-            }
-          });
-        });
-      });
-    }
-
-    // ==================== PREVENIR PULL-TO-REFRESH E CORRIGIR SCROLL ====================
-    function preventPullToRefresh() {
-      let touchStartY = 0;
-      
-      document.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-      }, { passive: false });
-      
-      document.addEventListener('touchmove', (e) => {
-        const touchY = e.touches[0].clientY;
-        const scrollTop = window.scrollY;
-        const scrollHeight = document.documentElement.scrollHeight;
-        const clientHeight = window.innerHeight;
-        
-        if (scrollTop === 0 && touchY > touchStartY) {
-          e.preventDefault();
-          return false;
-        }
-        
-        if (scrollTop + clientHeight >= scrollHeight - 10 && touchY < touchStartY) {
-          e.preventDefault();
-          return false;
-        }
-      }, { passive: false });
-    }
-    
-    function fixScrollBehavior() {
-      if (window.location.hash) {
-        const targetId = window.location.hash.substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          setTimeout(() => {
-            const offset = 80;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.scrollY - offset;
-            window.scrollTo({
-              top: Math.max(offsetPosition, 0),
-              behavior: 'smooth'
-            });
-          }, 300);
-        }
-      }
-      
-      let lastScrollTop = 0;
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        if (scrollTop === lastScrollTop && scrollTop > 0) {
-          setTimeout(() => {
-            window.scrollTo({
-              top: scrollTop + 1,
-              behavior: 'auto'
-            });
-          }, 10);
-        }
-        lastScrollTop = scrollTop;
-      }, { passive: true });
-    }
-    
-    function fixReturnScroll() {
-      const returnTarget = sessionStorage.getItem("voltarPara");
-      if (returnTarget) {
-        const targetId = returnTarget.substring(1);
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-          setTimeout(() => {
-            const offset = 80;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.scrollY - offset;
-            
-            window.scrollTo({
-              top: Math.max(offsetPosition, 0),
-              behavior: "smooth"
-            });
-            
-            sessionStorage.removeItem("voltarPara");
-          }, 300);
-        }
-      }
-    }
-
-    // ==================== PROTEÇÃO EDUCATIVA ====================
-    function initProtection() {
-      document.addEventListener('copy', function(e) {
-        const selection = window.getSelection().toString();
-        if (selection.length > 30) {
-          const credits = '\n\n📖 Fonte: EBD Fiel - https://ebdfiel.com.br\n✝️ "Examinai as Escrituras" - João 5:39';
-          e.clipboardData.setData('text/plain', selection + credits);
-          e.preventDefault();
-          showToast('📋 Copiado! Crédito da fonte adicionado automaticamente.', false);
-        }
-      });
-      
-      console.log('%c📖 EBD Fiel - Fiel à Palavra. Relevante para hoje.', 'color: #f7b24d; font-size: 16px; font-weight: bold;');
-      console.log('%cCompartilhe o link do site em vez de copiar o conteúdo. Obrigado! 🙏', 'color: #a7bacb; font-size: 12px;');
-    }
-
-    // ==================== NAVEGAÇÃO INFERIOR ====================
-    function updateBottomNavActive() {
-      const sections = [
-        { id: "home", link: "home" },
-        { id: "adult-class", link: "adult-class" },
-        { id: "youth-class", link: "youth-class" },
-        { id: "about", link: "about" }
-      ];
-
-      let current = "home";
-      const trigger = window.innerHeight * 0.35;
-
-      sections.forEach(section => {
-        const el = document.getElementById(section.id);
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= trigger && rect.bottom >= trigger) current = section.link;
-      });
-
-      document.querySelectorAll(".bottom-nav-link[data-target]").forEach(link => {
-        link.classList.toggle("active", link.dataset.target === current);
-      });
-    }
-
-    function setupSwipeBack() {
-      let startX = 0;
-      let startY = 0;
-      let tracking = false;
-
-      document.addEventListener("touchstart", e => {
-        const touch = e.touches[0];
-        startX = touch.clientX;
-        startY = touch.clientY;
-        tracking = startX <= 28;
-      }, { passive: true });
-
-      document.addEventListener("touchend", e => {
-        if (!tracking) return;
-
-        const touch = e.changedTouches[0];
-        const deltaX = touch.clientX - startX;
-        const deltaY = Math.abs(touch.clientY - startY);
-
-        if (deltaX > 90 && deltaY < 80) {
-          if (window.history.length > 1 && location.hash && location.hash !== "#home") {
-            history.back();
-          } else if (location.hash && location.hash !== "#home") {
-            scrollToTop();
-            location.hash = "#home";
-          }
-        }
-
-        tracking = false;
-      }, { passive: true });
-    }
-
-    // ==================== SETUP LINKS DE NAVEGAÇÃO ====================
-    function setupNavigationLinks() {
-      const navLinks = document.querySelectorAll("#mainNav a, .bottom-nav-link");
-      navLinks.forEach(link => {
+    // ==================== NAVEGAÇÃO ====================
+    function setupNavigation() {
+      document.querySelectorAll("#mainNav a, .logo").forEach(link => {
         link.addEventListener("click", (e) => {
+          e.preventDefault();
           const href = link.getAttribute("href");
-          if (href && href.startsWith("#")) {
-            e.preventDefault();
-            const targetId = href.substring(1);
-            
-            scrollToSection(targetId);
-            
-            history.pushState(null, null, href);
-            
-            const nav = document.getElementById("mainNav");
-            const mobileBtn = document.getElementById("mobileMenuBtn");
-            if (nav && nav.classList.contains("active")) {
-              nav.classList.remove("active");
-              if (mobileBtn) {
-                mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                mobileBtn.setAttribute("aria-expanded", "false");
-              }
-            }
+          if (href && href.startsWith("#")) scrollToSection(href.substring(1));
+          else scrollToTop();
+          const nav = document.getElementById("mainNav");
+          const mobileBtn = document.getElementById("mobileMenuBtn");
+          if (nav && nav.classList.contains("active")) {
+            nav.classList.remove("active");
+            if (mobileBtn) mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
           }
         });
       });
-      
-      const logo = document.getElementById("logo");
-      if (logo) {
-        logo.addEventListener("click", (e) => {
-          e.preventDefault();
-          scrollToTop();
-          history.pushState(null, null, "#home");
-        });
-      }
     }
 
     // ==================== INICIALIZAÇÃO ====================
     document.addEventListener("DOMContentLoaded", async () => {
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-      }
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       window.scrollTo(0, 0);
-      
-      loadOverrides();
       initTheme();
-      initGA();
-
-      try {
-        await carregarDados();
-      } catch (e) {
-        console.error("Erro ao carregar dados:", e);
-      }
-
-      hideLoadingOverlay();
-      setupNavigationLinks();
-      preventPullToRefresh();
-      fixScrollBehavior();
-      fixReturnScroll();
-      initProtection();
-
+      loadOverrides();
+      await carregarDados();
+      setupNavigation();
+      
       const mobileBtn = document.getElementById("mobileMenuBtn");
       const nav = document.getElementById("mainNav");
-
       if (mobileBtn && nav) {
         mobileBtn.addEventListener("click", () => {
           nav.classList.toggle("active");
-          const aberto = nav.classList.contains("active");
-          mobileBtn.innerHTML = aberto ? '<i class="fas fa-xmark"></i>' : '<i class="fas fa-bars"></i>';
-          mobileBtn.setAttribute("aria-expanded", aberto ? "true" : "false");
-        });
-
-        document.addEventListener("click", e => {
-          const clicouNoBotao = mobileBtn.contains(e.target);
-          const clicouNoMenu = nav.contains(e.target);
-
-          if (!clicouNoBotao && !clicouNoMenu && nav.classList.contains("active")) {
-            nav.classList.remove("active");
-            mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            mobileBtn.setAttribute("aria-expanded", "false");
-          }
+          mobileBtn.innerHTML = nav.classList.contains("active") ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
       }
-
-      window.addEventListener("scroll", updateBottomNavActive, { passive: true });
-      window.addEventListener("hashchange", () => {
-        const hash = window.location.hash.substring(1);
-        if (hash) {
-          scrollToSection(hash);
-        }
-      });
-      updateBottomNavActive();
-      setupSwipeBack();
-
-      sessionStorage.removeItem("voltarPara");
-
-      resizeCanvas();
-      startParticles();
-
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          resizeCanvas();
-        }, 120);
-      }, { passive: true });
-
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          stopParticles();
-        } else {
-          resizeCanvas();
-          startParticles();
-        }
-      });
-
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", async () => {
-          try {
-            const registration = await navigator.serviceWorker.register("./service-worker.js");
-            
-            console.log("[App] Service Worker registrado com sucesso");
-            
-            setupAutoUpdate();
-            await checkForUpdates();
-            await initializeNotifications();
-            
-            registration.addEventListener("updatefound", () => {
-              console.log("[App] Nova versão do service worker encontrada");
-              const newWorker = registration.installing;
-              
-              newWorker.addEventListener("statechange", () => {
-                if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-                  console.log("[App] Nova versão disponível para instalar");
-                  showUpdateNotification();
-                }
-              });
-            });
-          } catch (error) {
-            console.error("Erro ao registrar service worker:", error);
-          }
-        });
-      }
-
-      window.addEventListener("beforeinstallprompt", e => {
-        e.preventDefault();
-        deferredInstallPrompt = e;
-        updateInstallUI();
-      });
-
-      window.addEventListener("appinstalled", () => {
-        isAppInstalled = true;
-        deferredInstallPrompt = null;
-        updateInstallUI();
-      });
-
-      const installTopBtn = document.getElementById("installTopBtn");
-      const installBtn = document.getElementById("installAppBtn");
-      const installBottomBtn = document.getElementById("installBottomBtn");
-
-      if (installTopBtn) installTopBtn.addEventListener("click", installApp);
-      if (installBtn) installBtn.addEventListener("click", installApp);
-      if (installBottomBtn) installBottomBtn.addEventListener("click", installApp);
-
-      updateInstallUI();
-      loadSocialLinks();
       
-      if (window.location.hash) {
-        const hash = window.location.hash.substring(1);
-        setTimeout(() => scrollToSection(hash), 100);
-      }
-
-      const checkUpdatesBtn = document.getElementById("checkUpdatesBtn");
-      if (checkUpdatesBtn) {
-        checkUpdatesBtn.addEventListener("click", async (e) => {
-          e.preventDefault();
-          await checkForUpdates();
-          alert("Verificando atualizações... Se houver uma nova versão, você será notificado em breve.");
-        });
-      }
-
       const themeToggle = document.getElementById('themeToggle');
-      if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
-      }
-    });
-
-    window.addEventListener("pageshow", function (event) {
-      document.body.classList.remove("page-leaving");
-      document.body.style.opacity = "";
-      document.body.style.transform = "";
-      hideLoadingOverlay();
+      if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
       
-      if (event.persisted) {
-        window.scrollTo(0, 0);
-      }
-    });
-
-    window.addEventListener("load", function () {
-      window.scrollTo(0, 0);
+      const clearCacheBtn = document.getElementById('clearCacheBtn');
+      if (clearCacheBtn) clearCacheBtn.addEventListener('click', limparCache);
       
-      const splash = document.getElementById("splash-screen");
-      if (!splash) return;
-
-      setTimeout(() => {
-        splash.classList.add("fade-out");
-        setTimeout(() => splash.remove(), 650);
-      }, 1400);
+      const checkUpdatesBtn = document.getElementById('checkUpdatesBtn');
+      if (checkUpdatesBtn) checkUpdatesBtn.addEventListener('click', (e) => { e.preventDefault(); checkForUpdates(); });
+      
+      if (window.location.hash) setTimeout(() => scrollToSection(window.location.hash.substring(1)), 100);
     });
   </script>
 </body>
