@@ -1,0 +1,18 @@
+{
+  "name": "EBD Fiel",
+  "short_name": "EBD Fiel",
+  "description": "Lições bíblicas para Escola Bíblica Dominical",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#07111f",
+  "background_color": "#07111f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./ebdfiel.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

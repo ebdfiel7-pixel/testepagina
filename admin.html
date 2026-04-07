@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Admin - EBD Fiel</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-card {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid rgba(247, 178, 77, 0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .login-card h1 {
+      color: #f7b24d;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+    }
+    .login-card input {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #1e293b;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .login-card button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #f7b24d, #ff9800);
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .login-card button:hover { transform: translateY(-2px); }
+    .error { color: #ef4444; text-align: center; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <h1>🔐 Admin EBD Fiel</h1>
+    <input type="password" id="password" placeholder="Digite a senha" autofocus>
+    <button onclick="login()">Entrar no Painel</button>
+    <div id="errorMsg" class="error"></div>
+  </div>
+  <script>
+    function login() {
+      const pwd = document.getElementById("password").value;
+      if (pwd === "4141") {
+        localStorage.setItem("admin_auth", "true");
+        window.location.href = "admin-panel.html";
+      } else {
+        document.getElementById("errorMsg").innerHTML = "Senha incorreta! Tente novamente.";
+      }
+    }
+    document.getElementById("password").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") login();
+    });
+  </script>
+</body>
+</html>

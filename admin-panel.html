@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin - EBD Fiel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    .admin-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    
+    .header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border-radius: 20px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(247, 178, 77, 0.2);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header h1 { color: #f7b24d; display: flex; align-items: center; gap: 10px; }
+    .header-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-sair {
+      background: #ef4444;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-gerador {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    .btn-gerador:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-card h2 { font-size: 2rem; color: #f7b24d; }
+    .stat-card p { color: #94a3b8; margin-top: 8px; font-size: 0.85rem; }
+    
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .tab {
+      background: #1e293b;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      color: #94a3b8;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    .tab.active {
+      background: linear-gradient(135deg, #f7b24d, #ff9800);
+      color: #0f172a;
+    }
+    .tab-content { display: none; animation: fadeIn 0.3s; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    
+    .filters {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+    .filter-group { display: flex; flex-direction: column; gap: 6px; }
+    .filter-group label { font-size: 0.75rem; color: #94a3b8; }
+    .filter-group select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #0f172a;
+      color: #fff;
+    }
+    .btn-primary, .btn-success, .btn-danger, .btn-warning {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+    .btn-primary { background: linear-gradient(135deg, #f7b24d, #ff9800); color: #0f172a; }
+    .btn-success { background: #22c55e; color: #fff; }
+    .btn-danger { background: #ef4444; color: #fff; }
+    .btn-warning { background: #f59e0b; color: #fff; }
+    
+    .table-container { overflow-x: auto; background: #1e293b; border-radius: 16px; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #334155; }
+    th { color: #f7b24d; }
+    tr:hover { background: rgba(255,255,255,0.05); }
+    .btn-edit, .btn-toggle {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .btn-edit { background: #3b82f6; color: #fff; }
+    .btn-toggle.available { background: #22c55e; color: #fff; }
+    .btn-toggle.blocked { background: #ef4444; color: #fff; }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .badge-available { background: rgba(34,197,94,0.2); color: #4ade80; }
+    .badge-blocked { background: rgba(239,68,68,0.2); color: #f87171; }
+    
+    .settings-section {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+    .settings-section h3 {
+      color: #f7b24d;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.85rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #0f172a;
+      color: #fff;
+      font-size: 0.85rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #1e293b;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 900px;
+      max-height: 85vh;
+      overflow-y: auto;
+      border: 1px solid rgba(247,178,77,0.3);
+    }
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body { padding: 20px; }
+    .modal-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .trimesters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .trimester-card {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .trimester-card h4 { color: #f7b24d; margin-bottom: 10px; font-size: 1rem; }
+    .trimester-card p { margin: 6px 0; color: #94a3b8; font-size: 0.8rem; }
+    .progress-bar {
+      background: #0f172a;
+      border-radius: 10px;
+      height: 6px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+    .progress-fill {
+      background: linear-gradient(135deg, #f7b24d, #ff9800);
+      height: 100%;
+      border-radius: 10px;
+    }
+    .preview-box {
+      background: #fff;
+      color: #000;
+      padding: 12px;
+      border-radius: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 0.8rem;
+    }
+    
+    @media (max-width: 768px) {
+      .admin-container { padding: 12px; }
+      .filters { flex-direction: column; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .tab { font-size: 0.7rem; padding: 6px 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="admin-container">
+  <div class="header">
+    <h1><i class="fas fa-cog"></i> Painel Administrativo - EBD Fiel</h1>
+    <div class="header-buttons">
+      <button class="btn-gerador" onclick="window.open('https://gerador-ebd-fiel.onrender.com/', '_blank')">
+        <i class="fas fa-magic"></i> Gerador EBD Fiel
+      </button>
+      <button class="btn-sair" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card"><h2 id="totalLessons">0</h2><p>Total de Lições</p></div>
+    <div class="stat-card"><h2 id="totalTrimesters">0</h2><p>Trimestres</p></div>
+    <div class="stat-card"><h2 id="availableLessons">0</h2><p>Lições Disponíveis</p></div>
+    <div class="stat-card"><h2 id="totalClasses">0</h2><p>Classes</p></div>
+    <div class="stat-card"><h2 id="totalEdits">0</h2><p>Edições Salvas</p></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('lessons', this)"><i class="fas fa-book"></i> Lições</button>
+    <button class="tab" onclick="showTab('trimesters', this)"><i class="fas fa-layer-group"></i> Trimestres</button>
+    <button class="tab" onclick="showTab('general', this)"><i class="fas fa-sliders-h"></i> Configurações Gerais</button>
+    <button class="tab" onclick="showTab('social', this)"><i class="fab fa-instagram"></i> Redes Sociais</button>
+    <button class="tab" onclick="showTab('videos', this)"><i class="fab fa-youtube"></i> Vídeos</button>
+    <button class="tab" onclick="showTab('analytics', this)"><i class="fab fa-google"></i> Analytics</button>
+    <button class="tab" onclick="showTab('appearance', this)"><i class="fas fa-palette"></i> Aparência</button>
+    <button class="tab" onclick="showTab('backup', this)"><i class="fas fa-database"></i> Backup</button>
+  </div>
+
+  <!-- ==================== LIÇÕES ==================== -->
+  <div id="tabLessons" class="tab-content active">
+    <div class="filters">
+      <div class="filter-group">
+        <label>Classe:</label>
+        <select id="filterClass">
+          <option value="all">Todas</option>
+          <option value="adult">Adultos</option>
+          <option value="youth">Jovens</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Trimestre:</label>
+        <select id="filterTrimester">
+          <option value="all">Todos</option>
+          <option value="1">1º Trimestre</option>
+          <option value="2">2º Trimestre</option>
+          <option value="3">3º Trimestre</option>
+          <option value="4">4º Trimestre</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Status:</label>
+        <select id="filterStatus">
+          <option value="all">Todos</option>
+          <option value="available">Disponíveis</option>
+          <option value="blocked">Bloqueadas</option>
+        </select>
+      </div>
+      <div style="flex:1"></div>
+      <button class="btn-success" onclick="unlockAll()"><i class="fas fa-unlock-alt"></i> Liberar Todas</button>
+      <button class="btn-danger" onclick="blockAll()"><i class="fas fa-lock"></i> Bloquear Todas</button>
+    </div>
+    <div class="table-container">
+      <table id="lessonsTable">
+        <thead><tr><th>Classe</th><th>Trim.</th><th>Lição</th><th>Título</th><th>Data</th><th>Status</th><th>Ações</th></tr></thead>
+        <tbody id="lessonsTableBody"></tbody>
+       </table>
+    </div>
+  </div>
+
+  <!-- ==================== TRIMESTRES ==================== -->
+  <div id="tabTrimesters" class="tab-content">
+    <div class="trimesters-grid" id="trimestersGrid"></div>
+  </div>
+
+  <!-- ==================== CONFIGURAÇÕES GERAIS ==================== -->
+  <div id="tabGeneral" class="tab-content">
+    <div class="settings-section">
+      <h3><i class="fas fa-globe"></i> Informações do Site</h3>
+      <div class="form-group">
+        <label>Nome do Site:</label>
+        <input type="text" id="siteName" placeholder="EBD Fiel">
+      </div>
+      <div class="form-group">
+        <label>Descrição do Site (SEO):</label>
+        <textarea id="siteDescription" rows="2" placeholder="Lições bíblicas para Escola Bíblica Dominical"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Palavras-chave (SEO):</label>
+        <input type="text" id="siteKeywords" placeholder="EBD, Escola Bíblica, Lições Bíblicas">
+      </div>
+      <div class="form-group">
+        <label>URL do Site:</label>
+        <input type="url" id="siteUrl" placeholder="https://ebdfiel.com.br">
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3><i class="fas fa-envelope"></i> Contato</h3>
+      <div class="form-group">
+        <label>Email de Contato:</label>
+        <input type="email" id="contactEmail" placeholder="contato@ebdfiel.com.br">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp (com DDD):</label>
+        <input type="text" id="contactWhatsapp" placeholder="5511999999999">
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3><i class="fas fa-clock"></i> Configurações de Disponibilidade</h3>
+      <div class="form-group">
+        <label>Liberar lições com quantos dias de antecedência?</label>
+        <select id="releaseDays">
+          <option value="0">No mesmo dia</option>
+          <option value="3">3 dias antes</option>
+          <option value="6">6 dias antes (padrão)</option>
+          <option value="7">7 dias antes</option>
+          <option value="14">14 dias antes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3><i class="fas fa-code"></i> Códigos Personalizados</h3>
+      <div class="form-group">
+        <label>Código HTML do Header (Google Analytics, etc):</label>
+        <textarea id="customHeader" rows="4" placeholder="&lt;!-- Google Analytics --&gt;"></textarea>
+        <small style="color:#94a3b8">Será inserido antes do fechamento do &lt;/head&gt;</small>
+      </div>
+      <div class="form-group">
+        <label>Código HTML do Footer:</label>
+        <textarea id="customFooter" rows="4" placeholder="&lt;!-- Scripts personalizados --&gt;"></textarea>
+        <small style="color:#94a3b8">Será inserido antes do fechamento do &lt;/body&gt;</small>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="saveGeneralSettings()" style="width:100%;"><i class="fas fa-save"></i> Salvar todas as Configurações Gerais</button>
+  </div>
+
+  <!-- ==================== REDES SOCIAIS ==================== -->
+  <div id="tabSocial" class="tab-content">
+    <div class="settings-section">
+      <h3><i class="fab fa-instagram"></i> Instagram</h3>
+      <div class="form-group"><input type="url" id="socialInstagram" placeholder="https://instagram.com/seu_perfil"></div>
+      <h3><i class="fab fa-facebook"></i> Facebook</h3>
+      <div class="form-group"><input type="url" id="socialFacebook" placeholder="https://facebook.com/sua_pagina"></div>
+      <h3><i class="fab fa-youtube"></i> YouTube</h3>
+      <div class="form-group"><input type="url" id="socialYoutube" placeholder="https://youtube.com/@seu_canal"></div>
+      <h3><i class="fab fa-tiktok"></i> TikTok</h3>
+      <div class="form-group"><input type="url" id="socialTiktok" placeholder="https://tiktok.com/@seu_perfil"></div>
+      <button class="btn-primary" onclick="saveSocial()"><i class="fas fa-save"></i> Salvar Redes Sociais</button>
+    </div>
+  </div>
+
+  <!-- ==================== VÍDEOS ==================== -->
+  <div id="tabVideos" class="tab-content">
+    <div class="settings-section">
+      <h3><i class="fas fa-users"></i> Vídeo - Classe Adultos</h3>
+      <div class="form-group">
+        <input type="text" id="videoAdult" placeholder="ID do YouTube (ex: tQg7bmcS4yM)">
+        <small style="color:#94a3b8">O ID é o código após v= no link do YouTube</small>
+      </div>
+      <h3><i class="fas fa-user-graduate"></i> Vídeo - Classe Jovens</h3>
+      <div class="form-group">
+        <input type="text" id="videoYouth" placeholder="ID do YouTube (ex: uCCysCorUok)">
+        <small style="color:#94a3b8">O ID é o código após v= no link do YouTube</small>
+      </div>
+      <button class="btn-primary" onclick="saveVideos()"><i class="fas fa-save"></i> Salvar Vídeos</button>
+    </div>
+  </div>
+
+  <!-- ==================== GOOGLE ANALYTICS ==================== -->
+  <div id="tabAnalytics" class="tab-content">
+    <div class="settings-section">
+      <h3><i class="fab fa-google"></i> Google Analytics (GA4)</h3>
+      <div class="form-group">
+        <label>ID do Google Analytics (GA4):</label>
+        <input type="text" id="gaId" placeholder="G-XXXXXXXXXX">
+        <small style="color:#94a3b8">Exemplo: G-3E1K8B2C5D. Obtenha em analytics.google.com</small>
+      </div>
+      <button class="btn-primary" onclick="saveGA()"><i class="fas fa-save"></i> Salvar Google Analytics</button>
+    </div>
+    <div class="settings-section">
+      <h3><i class="fas fa-chart-line"></i> Estatísticas</h3>
+      <p>Configure seu Google Analytics para acompanhar:</p>
+      <ul style="margin-top: 12px; margin-left: 20px; color: #94a3b8;">
+        <li>📊 Número de visitantes</li>
+        <li>📱 Dispositivos utilizados</li>
+        <li>📍 Localização dos usuários</li>
+        <li>📖 Lições mais acessadas</li>
+        <li>⏱️ Tempo de permanência</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== APARÊNCIA ==================== -->
+  <div id="tabAppearance" class="tab-content">
+    <div class="settings-section">
+      <h3><i class="fas fa-palette"></i> Cores do Site</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Cor Principal:</label><input type="color" id="primaryColor" value="#f7b24d"></div>
+        <div class="form-group"><label>Cor Secundária:</label><input type="color" id="secondaryColor" value="#ff9800"></div>
+      </div>
+      <button class="btn-primary" onclick="saveAppearance()"><i class="fas fa-save"></i> Salvar Cores</button>
+    </div>
+    <div class="settings-section">
+      <h3><i class="fas fa-heading"></i> Títulos do Site</h3>
+      <div class="form-group"><label>Título Principal:</label><input type="text" id="siteTitle" placeholder="EBD Fiel"></div>
+      <div class="form-group"><label>Subtítulo:</label><input type="text" id="siteSubtitle" placeholder="Fiel à Palavra. Relevante para hoje."></div>
+      <button class="btn-primary" onclick="saveTitles()"><i class="fas fa-save"></i> Salvar Títulos</button>
+    </div>
+    <div class="settings-section">
+      <h3><i class="fas fa-image"></i> Logo</h3>
+      <div class="form-group"><label>URL do Logo:</label><input type="text" id="logoUrl" placeholder="./ebdfiel.png"></div>
+      <button class="btn-primary" onclick="saveLogo()"><i class="fas fa-save"></i> Salvar Logo</button>
+    </div>
+  </div>
+
+  <!-- ==================== BACKUP ==================== -->
+  <div id="tabBackup" class="tab-content">
+    <div class="settings-section">
+      <h3><i class="fas fa-download"></i> Exportar Dados</h3>
+      <p>Exporte todas as lições, configurações e overrides para um arquivo JSON.</p>
+      <button class="btn-primary" onclick="exportData()"><i class="fas fa-file-export"></i> Exportar JSON</button>
+    </div>
+    <div class="settings-section">
+      <h3><i class="fas fa-upload"></i> Importar Dados</h3>
+      <p>Importe dados de um arquivo JSON de backup.</p>
+      <input type="file" id="importFile" accept=".json" style="margin: 12px 0;">
+      <button class="btn-primary" onclick="importData()"><i class="fas fa-file-import"></i> Importar JSON</button>
+    </div>
+    <div class="settings-section" style="border: 1px solid rgba(239,68,68,0.3);">
+      <h3 style="color: #ef4444;"><i class="fas fa-exclamation-triangle"></i> Zona de Perigo</h3>
+      <p>Resetar todas as configurações e dados do site. Esta ação não pode ser desfeita!</p>
+      <button class="btn-danger" onclick="resetAll()"><i class="fas fa-trash-alt"></i> Resetar Tudo</button>
+      <button class="btn-warning" onclick="clearCache()" style="margin-left: 12px;"><i class="fas fa-broom"></i> Limpar Cache</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar Lição -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3><i class="fas fa-edit"></i> Editar Lição</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label>Título:</label><input type="text" id="editTitle"></div>
+      <div class="form-group"><label>Data (DD/MM/AAAA):</label><input type="text" id="editDate" placeholder="04/01/2026"></div>
+      <div class="form-group"><label>Conteúdo (HTML):</label><textarea id="editContent" rows="10" style="font-family:monospace;"></textarea></div>
+      <div class="form-group"><label>Pré-visualização:</label><div id="preview" class="preview-box"></div></div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="btn-primary" onclick="saveLesson()"><i class="fas fa-save"></i> Salvar</button>
+        <button class="btn-warning" onclick="formatHtml()"><i class="fas fa-magic"></i> Formatador Rápido</button>
+        <button class="btn-danger" onclick="closeModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let lessonsData = { adult: [], youth: [] };
+  let adminOverrides = {};
+  let contentOverrides = {};
+  let currentEditLesson = null;
+  let editCount = 0;
+
+  // Auth
+  if (localStorage.getItem("admin_auth") !== "true") {
+    window.location.href = "admin.html";
+  }
+
+  // Carregar dados
+  async function loadData() {
+    try {
+      const response = await fetch("./lessons.json?v=" + Date.now());
+      const data = await response.json();
+      lessonsData = data;
+      
+      let nextId = 1;
+      lessonsData.adult.forEach(l => { l.id = nextId++; l.tipo = "adult"; });
+      lessonsData.youth.forEach(l => { l.id = nextId++; l.tipo = "youth"; });
+      
+      const savedAdmin = localStorage.getItem("ebd_admin_overrides");
+      const savedContent = localStorage.getItem("ebd_content_overrides");
+      if (savedAdmin) adminOverrides = JSON.parse(savedAdmin);
+      if (savedContent) contentOverrides = JSON.parse(savedContent);
+      
+      editCount = Object.keys(contentOverrides).length;
+      
+      renderTable();
+      updateStats();
+      renderTrimesters();
+      loadSettings();
+    } catch(e) {
+      console.error(e);
+      alert("Erro ao carregar lessons.json");
+    }
+  }
+
+  function isAvailable(lesson) {
+    const key = `${lesson.tipo}:${lesson.id}`;
+    if (adminOverrides[key] !== undefined) return adminOverrides[key];
+    if (!lesson.data) return true;
+    const [d, m, a] = lesson.data.split("/");
+    const lessonDate = new Date(a, m-1, d);
+    const releaseDays = parseInt(localStorage.getItem("ebd_release_days") || "6");
+    const release = new Date(lessonDate);
+    release.setDate(lessonDate.getDate() - releaseDays);
+    return new Date() >= release;
+  }
+
+  function getFinalTitle(lesson) {
+    const key = `${lesson.tipo}:${lesson.id}`;
+    if (contentOverrides[key]?.titulo) return contentOverrides[key].titulo;
+    return lesson.titulo;
+  }
+
+  function getFinalContent(lesson) {
+    const key = `${lesson.tipo}:${lesson.id}`;
+    if (contentOverrides[key]?.conteudo) return contentOverrides[key].conteudo;
+    return lesson.conteudo || "";
+  }
+
+  function renderTable() {
+    const filterClass = document.getElementById("filterClass").value;
+    const filterTrimester = document.getElementById("filterTrimester").value;
+    const filterStatus = document.getElementById("filterStatus").value;
+    const tbody = document.getElementById("lessonsTableBody");
+    tbody.innerHTML = "";
+    
+    let all = [];
+    if (filterClass === "all" || filterClass === "adult") {
+      lessonsData.adult.forEach(l => all.push({...l, classeNome: "Adultos"}));
+    }
+    if (filterClass === "all" || filterClass === "youth") {
+      lessonsData.youth.forEach(l => all.push({...l, classeNome: "Jovens"}));
+    }
+    
+    all = all.filter(l => filterTrimester === "all" || l.trimestre == filterTrimester);
+    all = all.filter(l => {
+      if (filterStatus === "all") return true;
+      const available = isAvailable(l);
+      return filterStatus === "available" ? available : !available;
+    });
+    
+    if (all.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center">Nenhuma lição encontrada</td></tr>';
+      return;
+    }
+    
+    all.forEach(lesson => {
+      const row = tbody.insertRow();
+      const available = isAvailable(lesson);
+      row.insertCell(0).innerHTML = `<strong>${lesson.classeNome}</strong>`;
+      row.insertCell(1).innerHTML = `${lesson.trimestre}º`;
+      row.insertCell(2).innerHTML = String(lesson.numero).padStart(2, "0");
+      row.insertCell(3).innerHTML = getFinalTitle(lesson);
+      row.insertCell(4).innerHTML = lesson.data || "—";
+      row.insertCell(5).innerHTML = `<span class="badge ${available ? 'badge-available' : 'badge-blocked'}">${available ? 'Disponível' : 'Bloqueada'}</span>`;
+      row.insertCell(6).innerHTML = `
+        <div style="display:flex; gap:8px;">
+          <button class="btn-edit" onclick="openEditModal(${lesson.id}, '${lesson.tipo}')"><i class="fas fa-edit"></i> Editar</button>
+          <button class="btn-toggle ${available ? 'available' : 'blocked'}" onclick="toggleLesson(${lesson.id}, '${lesson.tipo}')">${available ? 'Bloquear' : 'Liberar'}</button>
+        </div>
+      `;
+    });
+  }
+
+  function toggleLesson(id, tipo) {
+    const key = `${tipo}:${id}`;
+    adminOverrides[key] = !adminOverrides[key];
+    localStorage.setItem("ebd_admin_overrides", JSON.stringify(adminOverrides));
+    renderTable();
+    updateStats();
+    renderTrimesters();
+  }
+
+  function unlockAll() {
+    if(confirm("Liberar TODAS as lições?")) {
+      [...lessonsData.adult, ...lessonsData.youth].forEach(l => {
+        adminOverrides[`${l.tipo}:${l.id}`] = true;
+      });
+      localStorage.setItem("ebd_admin_overrides", JSON.stringify(adminOverrides));
+      renderTable();
+      updateStats();
+      renderTrimesters();
+      alert("✅ Todas as lições foram liberadas!");
+    }
+  }
+
+  function blockAll() {
+    if(confirm("Bloquear TODAS as lições?")) {
+      [...lessonsData.adult, ...lessonsData.youth].forEach(l => {
+        adminOverrides[`${l.tipo}:${l.id}`] = false;
+      });
+      localStorage.setItem("ebd_admin_overrides", JSON.stringify(adminOverrides));
+      renderTable();
+      updateStats();
+      renderTrimesters();
+      alert("🔒 Todas as lições foram bloqueadas!");
+    }
+  }
+
+  function openEditModal(id, tipo) {
+    const lesson = [...lessonsData.adult, ...lessonsData.youth].find(l => l.id === id && l.tipo === tipo);
+    if(!lesson) return;
+    currentEditLesson = lesson;
+    document.getElementById("editTitle").value = getFinalTitle(lesson);
+    document.getElementById("editDate").value = lesson.data || "";
+    document.getElementById("editContent").value = getFinalContent(lesson);
+    document.getElementById("preview").innerHTML = getFinalContent(lesson) || "<p>Sem conteúdo</p>";
+    document.getElementById("editModal").style.display = "flex";
+  }
+
+  function saveLesson() {
+    if(!currentEditLesson) return;
+    const key = `${currentEditLesson.tipo}:${currentEditLesson.id}`;
+    if(!contentOverrides[key]) contentOverrides[key] = {};
+    contentOverrides[key].titulo = document.getElementById("editTitle").value;
+    contentOverrides[key].conteudo = document.getElementById("editContent").value;
+    localStorage.setItem("ebd_content_overrides", JSON.stringify(contentOverrides));
+    editCount = Object.keys(contentOverrides).length;
+    closeModal();
+    renderTable();
+    updateStats();
+    alert("✅ Lição salva!");
+  }
+
+  function formatHtml() {
+    let text = document.getElementById("editContent").value;
+    text = text.replace(/^# (.*)$/gm, '<h1>$1</h1>');
+    text = text.replace(/^## (.*)$/gm, '<h2>$1</h2>');
+    text = text.replace(/^### (.*)$/gm, '<h3>$1</h3>');
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    text = text.replace(/^- (.*)$/gm, '<li>$1</li>');
+    text = text.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    text = text.replace(/^(\d+)\. (.*)$/gm, '<li>$2</li>');
+    text = text.replace(/\n\n/g, '</p><p>');
+    text = '<p>' + text + '</p>';
+    text = text.replace(/<p><\/p>/g, '');
+    document.getElementById("editContent").value = text;
+    document.getElementById("preview").innerHTML = text;
+    alert("✅ HTML formatado!");
+  }
+
+  function closeModal() {
+    document.getElementById("editModal").style.display = "none";
+    currentEditLesson = null;
+  }
+
+  function updateStats() {
+    const total = lessonsData.adult.length + lessonsData.youth.length;
+    const trimestres = new Set();
+    let available = 0;
+    [...lessonsData.adult, ...lessonsData.youth].forEach(l => {
+      trimestres.add(l.trimestre);
+      if(isAvailable(l)) available++;
+    });
+    document.getElementById("totalLessons").innerHTML = total;
+    document.getElementById("totalTrimesters").innerHTML = trimestres.size;
+    document.getElementById("availableLessons").innerHTML = available;
+    document.getElementById("totalClasses").innerHTML = "2";
+    document.getElementById("totalEdits").innerHTML = editCount;
+  }
+
+  function renderTrimesters() {
+    const container = document.getElementById("trimestersGrid");
+    const classes = [
+      { tipo: "adult", nome: "Adultos", lessons: lessonsData.adult },
+      { tipo: "youth", nome: "Jovens", lessons: lessonsData.youth }
+    ];
+    let html = "";
+    
+    classes.forEach(c => {
+      for(let trim = 1; trim <= 4; trim++) {
+        const lessonsInTrim = c.lessons.filter(l => l.trimestre === trim);
+        const total = lessonsInTrim.length;
+        const available = lessonsInTrim.filter(l => isAvailable(l)).length;
+        const percent = total > 0 ? (available / total) * 100 : 0;
+        
+        html += `
+          <div class="trimester-card">
+            <h4><i class="fas fa-calendar-alt"></i> ${c.nome} - ${trim}º Trimestre</h4>
+            <p><strong>Lições:</strong> ${total} (${available} disponíveis)</p>
+            <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%"></div></div>
+            ${total > 0 ? `
+              <button class="btn-success" style="width:100%; margin-top:8px;" onclick="unlockTrimester('${c.tipo}', ${trim})"><i class="fas fa-unlock-alt"></i> Liberar todas</button>
+              <button class="btn-warning" style="width:100%; margin-top:8px;" onclick="blockTrimester('${c.tipo}', ${trim})"><i class="fas fa-lock"></i> Bloquear todas</button>
+            ` : '<p style="color:#ef4444; margin-top:12px;">⚠️ Nenhuma lição</p>'}
+          </div>
+        `;
+      }
+    });
+    container.innerHTML = html;
+  }
+
+  function unlockTrimester(tipo, trim) {
+    if(confirm(`Liberar ${tipo === "adult" ? "Adultos" : "Jovens"} - ${trim}º trimestre?`)) {
+      const lessons = tipo === "adult" ? lessonsData.adult : lessonsData.youth;
+      lessons.filter(l => l.trimestre === trim).forEach(l => {
+        adminOverrides[`${l.tipo}:${l.id}`] = true;
+      });
+      localStorage.setItem("ebd_admin_overrides", JSON.stringify(adminOverrides));
+      renderTable();
+      updateStats();
+      renderTrimesters();
+      alert("✅ Trimestre liberado!");
+    }
+  }
+
+  function blockTrimester(tipo, trim) {
+    if(confirm(`Bloquear ${tipo === "adult" ? "Adultos" : "Jovens"} - ${trim}º trimestre?`)) {
+      const lessons = tipo === "adult" ? lessonsData.adult : lessonsData.youth;
+      lessons.filter(l => l.trimestre === trim).forEach(l => {
+        adminOverrides[`${l.tipo}:${l.id}`] = false;
+      });
+      localStorage.setItem("ebd_admin_overrides", JSON.stringify(adminOverrides));
+      renderTable();
+      updateStats();
+      renderTrimesters();
+      alert("🔒 Trimestre bloqueado!");
+    }
+  }
+
+  function loadSettings() {
+    const saved = localStorage.getItem("ebd_settings");
+    if(saved) {
+      const config = JSON.parse(saved);
+      if(config.social) {
+        document.getElementById("socialInstagram").value = config.social.instagram || "";
+        document.getElementById("socialFacebook").value = config.social.facebook || "";
+        document.getElementById("socialYoutube").value = config.social.youtube || "";
+        document.getElementById("socialTiktok").value = config.social.tiktok || "";
+      }
+      if(config.videos) {
+        document.getElementById("videoAdult").value = config.videos.adult || "";
+        document.getElementById("videoYouth").value = config.videos.youth || "";
+      }
+      if(config.ga) {
+        document.getElementById("gaId").value = config.ga.id || "";
+      }
+      if(config.appearance) {
+        if(config.appearance.primaryColor) document.getElementById("primaryColor").value = config.appearance.primaryColor;
+        if(config.appearance.secondaryColor) document.getElementById("secondaryColor").value = config.appearance.secondaryColor;
+      }
+      if(config.titles) {
+        document.getElementById("siteTitle").value = config.titles.title || "EBD Fiel";
+        document.getElementById("siteSubtitle").value = config.titles.subtitle || "Fiel à Palavra. Relevante para hoje.";
+      }
+      if(config.general) {
+        document.getElementById("siteName").value = config.general.siteName || "EBD Fiel";
+        document.getElementById("siteDescription").value = config.general.siteDescription || "";
+        document.getElementById("siteKeywords").value = config.general.siteKeywords || "";
+        document.getElementById("siteUrl").value = config.general.siteUrl || "https://ebdfiel.com.br";
+        document.getElementById("contactEmail").value = config.general.contactEmail || "";
+        document.getElementById("contactWhatsapp").value = config.general.contactWhatsapp || "";
+        document.getElementById("customHeader").value = config.general.customHeader || "";
+        document.getElementById("customFooter").value = config.general.customFooter || "";
+        if(config.general.releaseDays) document.getElementById("releaseDays").value = config.general.releaseDays;
+        localStorage.setItem("ebd_release_days", config.general.releaseDays || "6");
+      }
+      if(config.logo) {
+        document.getElementById("logoUrl").value = config.logo || "./ebdfiel.png";
+      }
+    }
+  }
+
+  function saveGeneralSettings() {
+    const settings = JSON.parse(localStorage.getItem("ebd_settings") || "{}");
+    settings.general = {
+      siteName: document.getElementById("siteName").value,
+      siteDescription: document.getElementById("siteDescription").value,
+      siteKeywords: document.getElementById("siteKeywords").value,
+      siteUrl: document.getElementById("siteUrl").value,
+      contactEmail: document.getElementById("contactEmail").value,
+      contactWhatsapp: document.getElementById("contactWhatsapp").value,
+      customHeader: document.getElementById("customHeader").value,
+      customFooter: document.getElementById("customFooter").value,
+      releaseDays: document.getElementById("releaseDays").value
+    };
+    localStorage.setItem("ebd_settings", JSON.stringify(settings));
+    localStorage.setItem("ebd_release_days", document.getElementById("releaseDays").value);
+    alert("✅ Configurações Gerais salvas!");
+  }
+
+  function saveSocial() {
+    const settings = JSON.parse(localStorage.getItem("ebd_settings") || "{}");
+    settings.social = {
+      instagram: document.getElementById("socialInstagram").value,
+      facebook: document.getElementById("socialFacebook").value,
+      youtube: document.getElementById("socialYoutube").value,
+      tiktok: document.getElementById("socialTiktok").value
+    };
+    localStorage.setItem("ebd_settings", JSON.stringify(settings));
+    alert("✅ Redes sociais salvas!");
+  }
+
+  function saveVideos() {
+    const settings = JSON.parse(localStorage.getItem("ebd_settings") || "{}");
+    settings.videos = {
+      adult: document.getElementById("videoAdult").value,
+      youth: document.getElementById("videoYouth").value
+    };
+    localStorage.setItem("ebd_settings", JSON.stringify(settings));
+    alert("✅ Vídeos salvos!");
+  }
+
+  function saveGA() {
+    const settings = JSON.parse(localStorage.getItem("ebd_settings") || "{}");
+    settings.ga = {
+      id: document.getElementById("gaId").value
+    };
+    localStorage.setItem("ebd_settings", JSON.stringify(settings));
+    alert("✅ Google Analytics configurado! A página será recarregada para aplicar.");
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
+  }
+
+  function saveAppearance() {
+    const settings = JSON.parse(localStorage.getItem("ebd_settings") || "{}");
+    settings.appearance = {
+      primaryColor: document.getElementById("primaryColor").value,
+      secondaryColor: document.getElementById("secondaryColor").value
+    };
+    localStorage.setItem("ebd_settings", JSON.stringify(settings));
+    alert("✅ Cores salvas!");
+  }
+
+  function saveTitles() {
+    const settings = JSON.parse(localStorage.getItem("ebd_settings") || "{}");
+    settings.titles = {
+      title: document.getElementById("siteTitle").value,
+      subtitle: document.getElementById("siteSubtitle").value
+    };
+    localStorage.setItem("ebd_settings", JSON.stringify(settings));
+    alert("✅ Títulos salvos!");
+  }
+
+  function saveLogo() {
+    const settings = JSON.parse(localStorage.getItem("ebd_settings") || "{}");
+    settings.logo = document.getElementById("logoUrl").value;
+    localStorage.setItem("ebd_settings", JSON.stringify(settings));
+    alert("✅ Logo salvo!");
+  }
+
+  function exportData() {
+    const exportObj = {
+      lessons: lessonsData,
+      adminOverrides: adminOverrides,
+      contentOverrides: contentOverrides,
+      settings: localStorage.getItem("ebd_settings")
+    };
+    const blob = new Blob([JSON.stringify(exportObj, null, 2)], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `ebd_backup_${new Date().toISOString().slice(0,19)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importData() {
+    const file = document.getElementById("importFile").files[0];
+    if(!file) { alert("Selecione um arquivo!"); return; }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target.result);
+        if(data.lessons) lessonsData = data.lessons;
+        if(data.adminOverrides) adminOverrides = data.adminOverrides;
+        if(data.contentOverrides) contentOverrides = data.contentOverrides;
+        if(data.settings) localStorage.setItem("ebd_settings", data.settings);
+        localStorage.setItem("ebd_admin_overrides", JSON.stringify(adminOverrides));
+        localStorage.setItem("ebd_content_overrides", JSON.stringify(contentOverrides));
+        editCount = Object.keys(contentOverrides).length;
+        renderTable();
+        updateStats();
+        renderTrimesters();
+        loadSettings();
+        alert("✅ Importado!");
+      } catch(err) { alert("Erro ao importar"); }
+    };
+    reader.readAsText(file);
+  }
+
+  function resetAll() {
+    if(confirm("⚠️ Resetar TUDO?")) {
+      localStorage.clear();
+      location.reload();
+    }
+  }
+
+  function clearCache() {
+    if(confirm("Limpar cache?")) {
+      if("caches" in window) caches.keys().then(keys => keys.forEach(key => caches.delete(key)));
+      alert("✅ Cache limpo!");
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("admin_auth");
+    window.location.href = "admin.html";
+  }
+
+  function showTab(tabName, btn) {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(`tab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).classList.add("active");
+  }
+
+  document.getElementById("filterClass").addEventListener("change", () => renderTable());
+  document.getElementById("filterTrimester").addEventListener("change", () => renderTable());
+  document.getElementById("filterStatus").addEventListener("change", () => renderTable());
+  document.getElementById("editContent").addEventListener("input", () => {
+    document.getElementById("preview").innerHTML = document.getElementById("editContent").value;
+  });
+
+  loadData();
+</script>
+</body>
+</html>

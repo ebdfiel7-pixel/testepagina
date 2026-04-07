@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - EBD Fiel</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #06101c 0%, #0a1626 100%);
+      color: #eef6fc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .offline-box {
+      max-width: 400px;
+      padding: 32px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    h1 { color: #f7b24d; margin-bottom: 16px; }
+    p { color: #a7bacb; margin-bottom: 24px; }
+    button {
+      background: linear-gradient(135deg, #f7b24d, #ff9800);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #102131;
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-box">
+    <h1>🔌 Sem conexão</h1>
+    <p>Você está offline. Conecte-se à internet para acessar as lições atualizadas.</p>
+    <button onclick="location.reload()">Tentar novamente</button>
+  </div>
+</body>
+</html>
