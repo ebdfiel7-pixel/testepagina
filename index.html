@@ -24,7 +24,7 @@
   </script>
 
   <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#1a3a5c">
+  <meta name="theme-color" content="#2d4a6e">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="EBD Fiel">
@@ -40,31 +40,32 @@
 
   <style>
     :root {
-      --primary: #1a3a5c;
-      --primary-dark: #0f2a45;
-      --primary-light: #2c4a6e;
-      --secondary: #c9a03d;
-      --secondary-dark: #a07d2e;
-      --accent: #e8b84a;
+      --primary: #2d4a6e;
+      --primary-dark: #1e3a5f;
+      --primary-light: #4a6a8e;
+      --secondary: #b8860b;
+      --secondary-dark: #8b6508;
+      --accent: #d4a017;
       --text: #1e293b;
       --text-light: #475569;
       --text-muted: #64748b;
-      --bg: #ffffff;
-      --bg-soft: #f8fafc;
+      --bg: #f5f7fa;
+      --bg-soft: #ffffff;
       --bg-card: #ffffff;
       --border: #e2e8f0;
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
       --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08);
+      --radius: 14px;
     }
 
     [data-theme="dark"] {
-      --primary: #2c4a6e;
-      --primary-dark: #1e3a5f;
+      --primary: #4a6a8e;
+      --primary-dark: #2d4a6e;
+      --primary-light: #6a8aae;
       --text: #e2e8f0;
       --text-light: #cbd5e1;
       --text-muted: #94a3b8;
@@ -84,14 +85,31 @@
       min-height: 100vh;
     }
 
+    /* Fundo suave */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 10% 20%, rgba(45, 74, 110, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
     /* ==================== HEADER ==================== */
     .topbar {
-      background: var(--bg-card);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(10px);
+    }
+
+    [data-theme="dark"] .topbar {
+      background: rgba(15, 23, 42, 0.95);
     }
 
     .container {
@@ -117,13 +135,14 @@
     .logo-icon {
       width: 45px;
       height: 45px;
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-size: 1.3rem;
+      box-shadow: var(--shadow);
     }
 
     .logo-text h1 {
@@ -133,7 +152,7 @@
     }
 
     .logo-text p {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
     }
 
@@ -143,8 +162,8 @@
     }
 
     .nav-links a {
-      padding: 8px 16px;
-      border-radius: 8px;
+      padding: 8px 18px;
+      border-radius: 40px;
       color: var(--text-light);
       font-weight: 500;
       font-size: 0.9rem;
@@ -156,17 +175,23 @@
       color: var(--primary);
     }
 
-    .theme-toggle {
+    .nav-links a.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .theme-toggle, .install-btn {
       background: var(--bg-soft);
       border: 1px solid var(--border);
       border-radius: 40px;
-      padding: 8px 12px;
+      padding: 8px 14px;
       cursor: pointer;
       color: var(--text-light);
       transition: all 0.2s;
+      font-size: 0.9rem;
     }
 
-    .theme-toggle:hover {
+    .theme-toggle:hover, .install-btn:hover {
       background: var(--border);
     }
 
@@ -183,16 +208,32 @@
     .hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       padding: 60px 0;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .hero-content {
-      max-width: 700px;
+      max-width: 650px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-badge {
       display: inline-block;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.15);
       padding: 6px 14px;
       border-radius: 40px;
       font-size: 0.75rem;
@@ -213,7 +254,7 @@
       color: rgba(255,255,255,0.85);
       font-size: 1rem;
       margin-bottom: 28px;
-      max-width: 550px;
+      max-width: 500px;
     }
 
     .hero-buttons {
@@ -223,7 +264,7 @@
     }
 
     .btn {
-      padding: 12px 24px;
+      padding: 12px 28px;
       border-radius: 40px;
       font-weight: 600;
       font-size: 0.85rem;
@@ -238,12 +279,14 @@
 
     .btn-primary {
       background: var(--secondary);
-      color: var(--primary-dark);
+      color: white;
+      box-shadow: var(--shadow);
     }
 
     .btn-primary:hover {
       background: var(--secondary-dark);
       transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
     }
 
     .btn-outline {
@@ -256,7 +299,7 @@
       background: rgba(255,255,255,0.1);
     }
 
-    /* ==================== CARDS DE ESTATÍSTICAS ==================== */
+    /* ==================== STATS ==================== */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -268,7 +311,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 24px 20px;
       text-align: center;
       transition: all 0.2s;
     }
@@ -326,6 +369,7 @@
       border-radius: var(--radius);
       overflow: hidden;
       margin-bottom: 32px;
+      box-shadow: var(--shadow);
     }
 
     .class-header {
@@ -336,19 +380,20 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
+      background: var(--bg-soft);
     }
 
     .class-title {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .class-icon {
-      width: 50px;
-      height: 50px;
-      background: var(--primary);
-      border-radius: 14px;
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -367,30 +412,77 @@
     }
 
     .quiz-link {
-      background: var(--bg-soft);
+      background: var(--bg);
       border: 1px solid var(--border);
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 40px;
       font-size: 0.8rem;
       font-weight: 500;
       text-decoration: none;
       color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .quiz-link:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
     }
 
     .class-body {
       padding: 24px;
     }
 
+    /* ==================== LAYOUT VIDEO + LIÇÕES ==================== */
+    .class-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+    }
+
+    .video-section {
+      background: var(--bg-soft);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .video-section h5 {
+      padding: 14px 16px;
+      margin: 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* ==================== TRIMESTRE TABS ==================== */
     .trim-tabs {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 24px;
       flex-wrap: wrap;
     }
 
     .tab-btn {
-      padding: 10px 20px;
+      padding: 10px 22px;
       border-radius: 40px;
       border: 1px solid var(--border);
       background: var(--bg-card);
@@ -402,6 +494,7 @@
 
     .tab-btn:hover {
       background: var(--bg-soft);
+      transform: translateY(-1px);
     }
 
     .tab-btn.active {
@@ -463,7 +556,7 @@
 
     .lesson-quarter {
       display: inline-block;
-      padding: 4px 10px;
+      padding: 4px 12px;
       background: var(--bg-soft);
       border-radius: 20px;
       font-size: 0.7rem;
@@ -473,7 +566,7 @@
     }
 
     .lesson-number {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -512,7 +605,7 @@
       background: var(--primary);
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 40px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
@@ -533,6 +626,7 @@
       border-radius: var(--radius);
       padding: 40px;
       margin-top: 20px;
+      border: 1px solid var(--border);
     }
 
     .about-grid {
@@ -554,20 +648,20 @@
     .features-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 20px;
     }
 
     .feature {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       align-items: flex-start;
     }
 
     .feature-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--primary);
-      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -599,22 +693,17 @@
       margin-bottom: 16px;
     }
 
-    .about-quote h4 {
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-    }
-
     /* ==================== FOOTER ==================== */
     .footer {
       background: var(--bg-card);
       border-top: 1px solid var(--border);
-      padding: 40px 0 24px;
+      padding: 48px 0 24px;
       margin-top: 48px;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 32px;
       margin-bottom: 32px;
     }
@@ -638,12 +727,13 @@
     .social-links {
       display: flex;
       gap: 12px;
+      margin-top: 16px;
     }
 
     .social-links a {
       width: 36px;
       height: 36px;
-      background: var(--bg-soft);
+      background: var(--bg);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -664,12 +754,11 @@
       font-size: 0.75rem;
     }
 
-    /* ==================== BOTÃO LIMPAR CACHE ==================== */
     .clear-cache-btn {
       background: none;
       border: none;
       color: var(--text-muted);
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       cursor: pointer;
       opacity: 0.5;
       transition: opacity 0.2s;
@@ -680,7 +769,77 @@
       color: var(--danger);
     }
 
-    /* ==================== MOBILE ==================== */
+    /* ==================== NOTIFICAÇÃO ==================== */
+    #notificationPrompt {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 60px;
+      padding: 12px 20px;
+      z-index: 1000;
+      box-shadow: var(--shadow-lg);
+      display: none;
+    }
+
+    /* ==================== LOADING ==================== */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loading-box {
+      background: var(--bg-card);
+      padding: 24px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ==================== SPLASH ==================== */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s;
+    }
+
+    /* ==================== RESPONSIVO ==================== */
+    @media (max-width: 900px) {
+      .class-layout {
+        grid-template-columns: 1fr;
+      }
+      
+      .video-section {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 0 16px;
@@ -733,16 +892,34 @@
       .stats-grid {
         grid-template-columns: 1fr;
       }
-
-      .class-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
 
 <body>
+
+  <div id="splash-screen">
+    <div style="text-align: center; color: white;">
+      <i class="fas fa-bible" style="font-size: 4rem; margin-bottom: 16px;"></i>
+      <h2>EBD Fiel</h2>
+      <p>Carregando...</p>
+    </div>
+  </div>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-box">
+      <div class="loading-spinner"></div>
+      <strong>Abrindo lição...</strong>
+    </div>
+  </div>
+
+  <div id="notificationPrompt">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <i class="fas fa-bell" style="color: var(--secondary);"></i>
+      <span>Receba notificações de novas lições</span>
+      <button id="enableNotificationsBtn" style="background: var(--primary); color: white; border: none; padding: 6px 16px; border-radius: 40px; cursor: pointer;">Ativar</button>
+    </div>
+  </div>
 
   <header class="topbar">
     <div class="container">
@@ -764,13 +941,15 @@
           <a href="#about">Sobre</a>
         </nav>
 
-        <button class="theme-toggle" id="themeToggle">
-          <i class="fas fa-moon"></i>
-        </button>
-
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-          <i class="fas fa-bars"></i>
-        </button>
+        <div style="display: flex; gap: 8px;">
+          <button class="install-btn" id="installAppBtn" style="display: none;"><i class="fas fa-download"></i> Instalar</button>
+          <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -780,9 +959,9 @@
     <section class="hero" id="home">
       <div class="container">
         <div class="hero-content">
-          <span class="hero-badge"><i class="fas fa-church"></i> Desde 2024</span>
+          <span class="hero-badge"><i class="fas fa-church"></i> Fiel à Palavra</span>
           <h2>Formando discípulos<br>para uma geração fiel</h2>
-          <p>A Escola Bíblica Dominical é o alicerce do ensino cristão. Aqui você encontra lições bíblicas de qualidade para adultos e jovens, com conteúdo relevante e aplicação prática para a vida.</p>
+          <p>A Escola Bíblica Dominical é o alicerce do ensino cristão. Lições bíblicas de qualidade para adultos e jovens, com conteúdo relevante e aplicação prática.</p>
           <div class="hero-buttons">
             <a href="#adult-class" class="btn btn-primary"><i class="fas fa-book-open"></i> Classe Adultos</a>
             <a href="#youth-class" class="btn btn-outline"><i class="fas fa-users"></i> Classe Jovens</a>
@@ -793,7 +972,7 @@
 
     <div class="container">
       <!-- STATS -->
-      <div class="stats-grid" id="statsContainer">
+      <div class="stats-grid">
         <div class="stat-card">
           <i class="fas fa-book"></i>
           <h3 id="totalLessons">0</h3>
@@ -831,8 +1010,18 @@
           </div>
           <div class="class-body">
             <div class="trim-tabs" id="adultTabs"></div>
-            <div class="lessons-grid" id="adultLessonsContainer">
-              <div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Selecione um trimestre</div></div>
+            <div class="class-layout">
+              <div class="video-section">
+                <h5><i class="fas fa-video"></i> Vídeo de apoio</h5>
+                <div class="video-wrapper">
+                  <iframe id="adultVideoIframe" src="https://www.youtube.com/embed/tQg7bmcS4yM?rel=0" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div>
+                <div class="lessons-grid" id="adultLessonsContainer">
+                  <div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Selecione um trimestre</div></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -853,8 +1042,18 @@
           </div>
           <div class="class-body">
             <div class="trim-tabs" id="youthTabs"></div>
-            <div class="lessons-grid" id="youthLessonsContainer">
-              <div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Selecione um trimestre</div></div>
+            <div class="class-layout">
+              <div class="video-section">
+                <h5><i class="fas fa-video"></i> Vídeo de apoio</h5>
+                <div class="video-wrapper">
+                  <iframe id="youthVideoIframe" src="https://www.youtube.com/embed/uCCysCorUok?rel=0" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div>
+                <div class="lessons-grid" id="youthLessonsContainer">
+                  <div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Selecione um trimestre</div></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -942,22 +1141,6 @@
     </div>
   </footer>
 
-  <div class="loading-overlay" id="loadingOverlay" style="display: none;">
-    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999;">
-      <div style="background: var(--bg-card); padding: 24px; border-radius: 16px; text-align: center;">
-        <div class="loading-spinner" style="width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;"></div>
-        <strong>Abrindo lição...</strong>
-        <p style="font-size: 0.8rem; margin-top: 8px;">Preparando o conteúdo</p>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
-
   <script>
     // ==================== CONFIGURAÇÕES INICIAIS ====================
     let adultLessons = [];
@@ -967,6 +1150,17 @@
     const introSummaryCache = new Map();
     let activeAdultTrim = null;
     let activeYouthTrim = null;
+    let deferredInstallPrompt = null;
+    let swRegistration = null;
+
+    // ==================== GOOGLE ANALYTICS ====================
+    function initGA() {
+      const settings = localStorage.getItem("ebd_settings");
+      if(settings) {
+        const config = JSON.parse(settings);
+        if(config.ga && config.ga.id) console.log('[GA] Ativo');
+      }
+    }
 
     // ==================== MODO ESCURO/CLARO ====================
     function initTheme() {
@@ -979,11 +1173,8 @@
       const themeBtn = document.getElementById('themeToggle');
       if (!themeBtn) return;
       const icon = themeBtn.querySelector('i');
-      if (theme === 'dark') {
-        icon.className = 'fas fa-sun';
-      } else {
-        icon.className = 'fas fa-moon';
-      }
+      if (theme === 'dark') icon.className = 'fas fa-sun';
+      else icon.className = 'fas fa-moon';
     }
 
     function toggleTheme() {
@@ -1129,7 +1320,7 @@
       todosTrimestres.forEach(trim => {
         const temLicoes = trimestresExistentes.includes(trim);
         const btn = document.createElement("button");
-        btn.className = `tab-btn trim-q${trim}`;
+        btn.className = `tab-btn`;
         if (trim === currentTrim) btn.classList.add("trim-atual");
         btn.innerHTML = `${trim}º Trimestre`;
         if (!temLicoes) btn.style.opacity = "0.5";
@@ -1153,7 +1344,7 @@
       if (!temLicoesNoTrimestreAtual && trimestresExistentes.length > 0) {
         trimestreParaAtivar = trimestresExistentes[0];
       }
-      const btnToActivate = tabsContainer.querySelector(`.tab-btn.trim-q${trimestreParaAtivar}`);
+      const btnToActivate = tabsContainer.querySelector(`.tab-btn:nth-child(${trimestreParaAtivar})`);
       if (btnToActivate) setTimeout(() => btnToActivate.click(), 100);
       else lessonsContainer.innerHTML = '<div class="lesson-card"><div class="lesson-body" style="text-align:center; padding:40px;">📖 Selecione um trimestre</div></div>';
     }
@@ -1216,13 +1407,11 @@
 
     // ==================== ABRIR LIÇÃO ====================
     function showLoadingOverlay() {
-      const overlay = document.getElementById("loadingOverlay");
-      if (overlay) overlay.style.display = "flex";
+      document.getElementById("loadingOverlay").style.display = "flex";
     }
 
     function hideLoadingOverlay() {
-      const overlay = document.getElementById("loadingOverlay");
-      if (overlay) overlay.style.display = "none";
+      document.getElementById("loadingOverlay").style.display = "none";
     }
 
     function abrirNovaGuia(licao) {
@@ -1233,6 +1422,88 @@
       } catch (e) { console.error(e); return; }
       showLoadingOverlay();
       setTimeout(() => { window.location.href = "./licao.html"; }, 200);
+    }
+
+    // ==================== REDES SOCIAIS ====================
+    function loadSocialLinks() {
+      const settings = localStorage.getItem("ebd_settings");
+      if (settings) {
+        try {
+          const config = JSON.parse(settings);
+          if (config.videos) {
+            if (config.videos.adult) {
+              const adultIframe = document.getElementById("adultVideoIframe");
+              if (adultIframe) adultIframe.src = `https://www.youtube.com/embed/${config.videos.adult}?rel=0`;
+            }
+            if (config.videos.youth) {
+              const youthIframe = document.getElementById("youthVideoIframe");
+              if (youthIframe) youthIframe.src = `https://www.youtube.com/embed/${config.videos.youth}?rel=0`;
+            }
+          }
+        } catch(e) { console.error(e); }
+      }
+    }
+
+    // ==================== INSTALAÇÃO DO APP ====================
+    function updateInstallUI() {
+      const installBtn = document.getElementById("installAppBtn");
+      if (!installBtn) return;
+      if (deferredInstallPrompt) {
+        installBtn.style.display = "flex";
+        installBtn.onclick = async () => {
+          if (deferredInstallPrompt) {
+            deferredInstallPrompt.prompt();
+            const choice = await deferredInstallPrompt.userChoice;
+            if (choice.outcome === "accepted") installBtn.style.display = "none";
+          }
+        };
+      }
+    }
+
+    // ==================== NOTIFICAÇÕES ====================
+    async function initializeNotifications() {
+      if (!('Notification' in window)) return;
+      const enableBtn = document.getElementById('enableNotificationsBtn');
+      if (enableBtn) {
+        enableBtn.addEventListener('click', async () => {
+          const permission = await Notification.requestPermission();
+          if (permission === 'granted') {
+            document.getElementById('notificationPrompt').style.display = 'none';
+            alert('✅ Notificações ativadas!');
+          }
+        });
+      }
+      setTimeout(() => {
+        if (Notification.permission === 'default') {
+          document.getElementById('notificationPrompt').style.display = 'flex';
+        }
+      }, 3000);
+    }
+
+    // ==================== PROTEÇÃO EDUCATIVA ====================
+    function initProtection() {
+      document.addEventListener('copy', function(e) {
+        const selection = window.getSelection().toString();
+        if (selection.length > 30) {
+          const credits = '\n\n📖 Fonte: EBD Fiel - https://ebdfiel.com.br\n✝️ "Examinai as Escrituras" - João 5:39';
+          e.clipboardData.setData('text/plain', selection + credits);
+          e.preventDefault();
+        }
+      });
+    }
+
+    // ==================== ATUALIZAÇÕES ====================
+    async function checkForUpdates() {
+      if ('serviceWorker' in navigator) {
+        const registration = await navigator.serviceWorker.getRegistration();
+        if (registration) await registration.update();
+      }
+      alert('Verificando atualizações...');
+    }
+
+    function setupAutoUpdate() {
+      if (!('serviceWorker' in navigator)) return;
+      setInterval(() => { checkForUpdates(); }, 60 * 60 * 1000);
     }
 
     // ==================== LIMPAR CACHE ====================
@@ -1246,15 +1517,6 @@
         alert('Cache limpo! A página será recarregada.');
         window.location.reload(true);
       }
-    }
-
-    // ==================== ATUALIZAÇÕES ====================
-    async function checkForUpdates() {
-      if ('serviceWorker' in navigator) {
-        const registration = await navigator.serviceWorker.getRegistration();
-        if (registration) await registration.update();
-      }
-      alert('Verificando atualizações... Se houver uma nova versão, ela será instalada em breve.');
     }
 
     // ==================== NAVEGAÇÃO ====================
@@ -1275,13 +1537,27 @@
       });
     }
 
+    // ==================== SPLASH SCREEN ====================
+    window.addEventListener("load", function() {
+      const splash = document.getElementById("splash-screen");
+      if (splash) {
+        setTimeout(() => {
+          splash.style.opacity = "0";
+          setTimeout(() => splash.remove(), 500);
+        }, 1000);
+      }
+    });
+
     // ==================== INICIALIZAÇÃO ====================
     document.addEventListener("DOMContentLoaded", async () => {
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       window.scrollTo(0, 0);
       initTheme();
+      initGA();
       loadOverrides();
       await carregarDados();
+      loadSocialLinks();
+      initProtection();
       setupNavigation();
       
       const mobileBtn = document.getElementById("mobileMenuBtn");
@@ -1303,6 +1579,26 @@
       if (checkUpdatesBtn) checkUpdatesBtn.addEventListener('click', (e) => { e.preventDefault(); checkForUpdates(); });
       
       if (window.location.hash) setTimeout(() => scrollToSection(window.location.hash.substring(1)), 100);
+      
+      // Service Worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", async () => {
+          try {
+            const registration = await navigator.serviceWorker.register("./service-worker.js");
+            console.log("[App] Service Worker registrado");
+            setupAutoUpdate();
+            await initializeNotifications();
+          } catch (error) { console.error("Erro:", error); }
+        });
+      }
+      
+      window.addEventListener("beforeinstallprompt", e => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        updateInstallUI();
+      });
+      
+      updateInstallUI();
     });
   </script>
 </body>
